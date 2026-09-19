@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Kanit:wght@600;700&family=Poltawski+Nowy:wght@700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css?v=6" />
 </head>
 <body>
 
@@ -18,9 +18,12 @@
     <div class="nav__bar">
       <a href="#home" class="nav__logo" data-logo="small"></a>
       <nav class="nav__links" data-nav="inline"></nav>
-      <button class="nav__toggle" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav__right">
+        <a class="nav__cta" data-navcta hidden></a>
+        <button class="nav__toggle" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
     <nav class="nav__menu" data-nav="menu"></nav>
   </header>
@@ -31,12 +34,21 @@
       <span class="hero__mark hero__mark--excl" aria-hidden="true">!</span>
       <span class="hero__mark hero__mark--inv" aria-hidden="true">¡</span>
       <div class="container hero__inner">
-        <div class="hero__logo" data-logo="big"></div>
-        <p class="hero__desc" data-text="hero.description"></p>
-        <p class="hero__prompt" data-text="hero.contactPrompt"></p>
-        <div class="socials" data-socials></div>
+        <div class="hero__text">
+          <div class="hero__logo" data-logo="big"></div>
+          <p class="hero__desc" data-text="hero.description"></p>
+          <div class="hero__ctas" data-cta></div>
+          <p class="hero__prompt" data-text="hero.contactPrompt"></p>
+          <div class="socials" data-socials></div>
+        </div>
+        <div class="hero__cols" data-herocols aria-hidden="true"></div>
       </div>
     </section>
+
+    <!-- Scrolling Spanish words -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__band"><div class="ticker__track" data-ticker></div></div>
+    </div>
 
     <!-- Stats -->
     <section class="stats">
@@ -56,7 +68,20 @@
       <div class="container">
         <h2 class="section__title" data-text="teachers.title"></h2>
         <p class="section__subtitle" data-text="teachers.subtitle"></p>
-        <div class="accordion" data-accordion></div>
+        <div class="cred" data-cred>
+          <div class="cred__chips"></div>
+          <div class="cred__pop" role="tooltip" id="cred-pop">
+            <p class="cred__pop-title"></p>
+            <p class="cred__pop-text"></p>
+          </div>
+        </div>
+        <div class="teachers" data-teachers>
+          <div class="teachers__nav">
+            <button class="round-btn" data-dir="-1" aria-label="Previous teacher">‹</button>
+            <button class="round-btn" data-dir="1" aria-label="Next teacher">›</button>
+          </div>
+          <div class="teachers__track"></div>
+        </div>
       </div>
     </section>
 
@@ -120,7 +145,7 @@
     </div>
   </footer>
 
-  <script src="content.js"></script>
-  <script src="assets/main.js"></script>
+  <script src="content.js?v=6"></script>
+  <script src="assets/main.js?v=6"></script>
 </body>
 </html>

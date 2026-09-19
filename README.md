@@ -19,6 +19,11 @@ Keep the quotes and the commas between items.
 - **Photos**: copy images into `images/` and list them in `classes.photos`,
   `feedback.images` or `workshop.images`. Any missing file shows a striped
   placeholder that says which file name it expects.
+- **Teachers**: `teachers.profiles` — one `{ name, role, bio, photo }` per teacher (portrait photos, ~4:5).
+  `teachers.items` are the team-strength chips above them.
+- **Hero photo columns**: `hero.photos` (leave `[]` to reuse the class + workshop photos).
+- **Buttons**: `navCta`, `hero.ctaPrimary`, `hero.ctaSecondary` — use `url` for a link or `target` for a section.
+- **Scrolling words band**: `ticker`.
 - **Logo**: set `logoImage: "images/logo.png"` to use your own logo file instead
   of the built-in text logo.
 - **Colors**: change the values at the top of `assets/style.css` (`--red`, `--yellow`, …).

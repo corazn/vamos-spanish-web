@@ -61,7 +61,8 @@
     work: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12h18M11 12v2h2v-2"/></svg>',
     language: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3 4h12v9H8l-3 3v-3H3V4Z"/><path d="M15 8h6v9h-2v3l-3-3h-4v-2"/><text x="5" y="11.5" font-size="6" font-family="sans-serif" fill="currentColor" stroke="none" font-weight="700">ES</text></svg>',
   };
-  var CHEVRON = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 4.5 3 3 3-3"/></svg>';
+  var CALENDAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+  var CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
 
   /* ---------- meta ---------- */
   if (S.meta) {
@@ -98,6 +99,61 @@
   });
   document.addEventListener("click", function (e) { if (!nav.contains(e.target)) setMenu(false); });
 
+  /* ---------- buttons (nav + hero) ---------- */
+  // { label, url } opens a link in a new tab; { label, target } jumps to a section
+  function linkAttrs(item, attrs) {
+    if (item.url) { attrs.href = item.url; attrs.target = "_blank"; attrs.rel = "noopener"; }
+    else attrs.href = "#" + (item.target || "home");
+    return attrs;
+  }
+  var navCta = document.querySelector("[data-navcta]");
+  if (S.navCta && S.navCta.label) {
+    Object.entries(linkAttrs(S.navCta, {})).forEach(function (kv) { navCta.setAttribute(kv[0], kv[1]); });
+    navCta.textContent = S.navCta.label;
+    navCta.hidden = false;
+  }
+  var ctaBox = document.querySelector("[data-cta]");
+  [["ctaPrimary", "btn btn--primary"], ["ctaSecondary", "btn btn--ghost"]].forEach(function (b) {
+    var item = get("hero." + b[0]);
+    if (!item || !item.label) return;
+    var a = el("a", linkAttrs(item, { class: b[1], text: item.label }));
+    if (b[0] === "ctaPrimary") a.appendChild(el("span", { text: "→", "aria-hidden": "true" }));
+    ctaBox.appendChild(a);
+  });
+
+  /* ---------- hero photo columns ---------- */
+  (function () {
+    var box = document.querySelector("[data-herocols]");
+    var list = get("hero.photos") || [];
+    if (!list.length) list = (get("classes.photos") || []).concat(get("workshop.images") || []);
+    if (!list.length) { box.remove(); return; }
+    var cols = [[], [], []];
+    list.forEach(function (src, i) { cols[i % 3].push(src); });
+    cols.forEach(function (srcs, c) {
+      if (!srcs.length) srcs = list.slice(0, 1);
+      // rotate each column's order a bit so neighbours don't line up, then repeat
+      // until a column has at least 4 tiles, then duplicate for a seamless loop
+      var set = srcs.slice(c % srcs.length).concat(srcs.slice(0, c % srcs.length));
+      while (set.length < 4) set = set.concat(srcs);
+      var track = el("div", { class: "hero__track" });
+      set.concat(set).forEach(function (src) {
+        track.appendChild(el("div", { class: "hero__tile" }, [img(src, "")]));
+      });
+      box.appendChild(el("div", { class: "hero__col" }, [track]));
+    });
+  })();
+
+  /* ---------- word ticker ---------- */
+  (function () {
+    var track = document.querySelector("[data-ticker]");
+    var words = S.ticker || [];
+    if (!words.length) { track.closest(".ticker").remove(); return; }
+    // repeat so one half is wider than any screen, then duplicate for the loop
+    var half = words.slice();
+    while (half.length < 16) half = half.concat(words);
+    half.concat(half).forEach(function (w) { track.appendChild(el("span", { text: w })); });
+  })();
+
   /* ---------- socials ---------- */
   document.querySelectorAll("[data-socials]").forEach(function (box) {
     (S.socials || []).forEach(function (s) {
@@ -122,33 +178,117 @@
 
   /* ---------- timeline ---------- */
   var tl = document.querySelector("[data-timeline]");
-  (get("about.timeline") || []).forEach(function (t) {
-    tl.appendChild(el("li", { class: "reveal" }, [
-      el("h3", { text: t.year }),
-      el("p", { text: t.text }),
+  var tlFill = el("li", { class: "timeline__fill", "aria-hidden": "true" });
+  tl.appendChild(tlFill);
+  // wraps numbers like 20.000 / 900 in <mark> so they stand out
+  function highlightNumbers(text) {
+    var p = el("p");
+    text.split(/(\d{1,3}(?:\.\d{3})+|\d{3,})/).forEach(function (part, i) {
+      p.appendChild(i % 2 ? el("mark", { text: part }) : document.createTextNode(part));
+    });
+    return p;
+  }
+  (get("about.timeline") || []).forEach(function (t, i) {
+    tl.appendChild(el("li", { class: "tl-item reveal tl-item--" + (i % 2 ? "right" : "left") }, [
+      el("span", { class: "tl-dot", "aria-hidden": "true" }),
+      el("div", { class: "tl-card" }, [
+        el("h3", { class: "tl-year", text: t.year }),
+        highlightNumbers(t.text),
+      ]),
     ]));
   });
 
-  /* ---------- accordion ---------- */
-  var acc = document.querySelector("[data-accordion]");
-  (get("teachers.items") || []).forEach(function (item, i) {
-    var id = "acc-" + i;
-    var head = el("button", { class: "acc__head", "aria-expanded": "false", "aria-controls": id }, [
-      el("span", { class: "acc__icon", html: ACC_ICONS[item.icon] || ACC_ICONS.degree }),
-      el("span", { class: "acc__title", text: item.title }),
-      el("span", { class: "acc__chev", html: CHEVRON }),
-    ]);
-    var box = el("div", { class: "acc reveal" }, [
-      head,
-      el("div", { class: "acc__body", id: id }, [el("div", null, [el("p", { text: item.text })])]),
-    ]);
-    head.addEventListener("click", function () {
-      var open = !box.classList.contains("is-open");
-      box.classList.toggle("is-open", open);
-      head.setAttribute("aria-expanded", String(open));
+  /* ---------- teacher credentials (chips) ---------- */
+  (function () {
+    var box = document.querySelector("[data-cred]");
+    var chips = box.querySelector(".cred__chips");
+    var pop = box.querySelector(".cred__pop");
+    var list = get("teachers.items") || [];
+    if (!list.length) { box.remove(); return; }
+    var current = -1, lastPointer = "mouse";
+
+    // one shared card, positioned under whichever chip is hovered / tapped
+    function show(i, chip) {
+      current = i;
+      pop.querySelector(".cred__pop-title").textContent = list[i].title;
+      pop.querySelector(".cred__pop-text").textContent = list[i].text;
+      chips.querySelectorAll(".cred__chip").forEach(function (c, j) { c.classList.toggle("is-active", j === i); });
+      var b = box.getBoundingClientRect(), c = chip.getBoundingClientRect();
+      var w = pop.offsetWidth;
+      var center = c.left + c.width / 2 - b.left;
+      var left = Math.min(Math.max(center - w / 2, 0), b.width - w);
+      pop.style.left = left + "px";
+      pop.style.top = (c.bottom - b.top + 12) + "px";
+      pop.style.setProperty("--ax", (center - left) + "px"); // arrow points at the chip
+      pop.classList.add("is-shown");
+    }
+    function hide() {
+      current = -1;
+      pop.classList.remove("is-shown");
+      chips.querySelectorAll(".cred__chip").forEach(function (c) { c.classList.remove("is-active"); });
+    }
+
+    list.forEach(function (item, i) {
+      var chip = el("button", { class: "cred__chip", type: "button", "aria-describedby": "cred-pop" }, [
+        el("span", { class: "cred__icon", html: ACC_ICONS[item.icon] || ACC_ICONS.degree }),
+        el("span", { text: item.title }),
+      ]);
+      chip.addEventListener("pointerdown", function (e) { lastPointer = e.pointerType; });
+      chip.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") show(i, chip); });
+      chip.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hide(); });
+      // keyboard focus only (a tap also focuses, but that's handled by click)
+      chip.addEventListener("focus", function () { if (chip.matches(":focus-visible")) show(i, chip); });
+      chip.addEventListener("blur", hide);
+      // touch: tap toggles (mouse already handled by hover)
+      chip.addEventListener("click", function () {
+        if (lastPointer === "mouse") return;
+        if (current === i) hide(); else show(i, chip);
+      });
+      chips.appendChild(chip);
     });
-    acc.appendChild(box);
-  });
+    chips.addEventListener("scroll", hide, { passive: true });
+    window.addEventListener("resize", hide);
+    document.addEventListener("pointerdown", function (e) { if (!box.contains(e.target)) hide(); });
+  })();
+
+  /* ---------- teacher profile cards (scrolling row) ---------- */
+  (function () {
+    var box = document.querySelector("[data-teachers]");
+    var track = box.querySelector(".teachers__track");
+    var list = get("teachers.profiles") || [];
+    if (!list.length) { box.remove(); return; }
+    list.forEach(function (t) {
+      var card = el("article", { class: "tcard", tabindex: "0", "aria-label": t.name }, [
+        el("div", { class: "tcard__photo" }, [img(t.photo, t.name)]),
+        el("div", { class: "tcard__panel" }, [
+          el("h3", { class: "tcard__name", text: t.name }),
+          t.role ? el("p", { class: "tcard__role", text: t.role }) : null,
+          t.bio ? el("div", { class: "tcard__bio" }, [el("p", { text: t.bio })]) : null,
+        ]),
+      ]);
+      // tap to show / hide the bio on touch screens
+      card.addEventListener("click", function () { card.classList.toggle("is-open"); });
+      track.appendChild(card);
+    });
+    var btns = box.querySelectorAll(".round-btn");
+    function step() {
+      var c = track.querySelector(".tcard");
+      return c ? c.getBoundingClientRect().width + 16 : 280;
+    }
+    function updateBtns() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      btns[0].disabled = track.scrollLeft <= 2;
+      btns[1].disabled = track.scrollLeft >= max;
+    }
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        track.scrollBy({ left: Number(b.getAttribute("data-dir")) * step(), behavior: "smooth" });
+      });
+    });
+    track.addEventListener("scroll", updateBtns, { passive: true });
+    window.addEventListener("resize", updateBtns);
+    updateBtns();
+  })();
 
   /* ---------- classes gallery ---------- */
   var gal = document.querySelector("[data-gallery]");
@@ -171,17 +311,21 @@
   /* ---------- schedule ---------- */
   var sch = document.querySelector("[data-schedule]");
   (get("schedule.courses") || []).forEach(function (c) {
+    var rows = el("div", { class: "course__rows" });
     var course = el("div", { class: "course reveal" }, [
       el("div", { class: "course__head" }, [
         el("span", { class: "course__name", text: c.name }),
         el("span", { class: "course__label", text: get("schedule.startLabel") || "Khai giảng" }),
       ]),
+      rows,
     ]);
     (c.classes || []).forEach(function (k) {
-      course.appendChild(el("div", { class: "course__row" }, [
+      var days = el("span", { html: CALENDAR }); days.appendChild(document.createTextNode(k.days));
+      var time = el("span", { html: CLOCK }); time.appendChild(document.createTextNode(k.time));
+      rows.appendChild(el("div", { class: "course__row" }, [
         el("div", null, [
           el("div", { class: "course__code", text: k.code }),
-          el("div", { class: "course__when" }, [el("span", { text: k.days }), el("span", { text: k.time })]),
+          el("div", { class: "course__when" }, [days, time]),
         ]),
         el("span", { class: "course__date", text: k.start }),
       ]));
@@ -232,7 +376,89 @@
     });
   })();
 
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- count-up numbers ---------- */
+  (function () {
+    var nums = document.querySelectorAll(".stat__num");
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
+    function run(node) {
+      var original = node.textContent;
+      var m = original.match(/\d[\d.,]*/);
+      if (!m) return;
+      var target = parseInt(m[0].replace(/[.,]/g, ""), 10);
+      var useSep = /[.,]/.test(m[0]);
+      var t0 = null, dur = 1600;
+      function frame(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min((t - t0) / dur, 1);
+        var v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        node.textContent = original.replace(m[0], useSep ? v.toLocaleString("vi-VN") : String(v));
+        if (p < 1) requestAnimationFrame(frame); else node.textContent = original;
+      }
+      requestAnimationFrame(frame);
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (n) { io.observe(n); });
+  })();
+
+  /* ---------- parallax on the hero ---------- */
+  (function () {
+    if (reduceMotion) return;
+    var hero = document.querySelector(".hero");
+    var marks = hero.querySelectorAll(".hero__mark");
+    var cols = hero.querySelector(".hero__cols");
+    var text = hero.querySelector(".hero__text");
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var y = window.scrollY;
+      if (y > hero.offsetHeight) return;
+      marks.forEach(function (m) { m.style.setProperty("--py", (y * 0.3) + "px"); });
+      if (cols) cols.style.setProperty("--py", (y * -0.08) + "px");
+      text.style.transform = "translateY(" + (y * 0.12) + "px)";
+      text.style.opacity = String(Math.max(1 - y / (hero.offsetHeight * 0.9), 0.2));
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  })();
+
+  /* ---------- timeline line that fills as you scroll ---------- */
+  (function () {
+    var items = tl.querySelectorAll(".tl-item");
+    if (!items.length) return;
+    if (reduceMotion) {
+      tlFill.style.transform = "none";
+      items.forEach(function (n) { n.classList.add("is-active"); });
+      return;
+    }
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = tl.getBoundingClientRect();
+      var p = Math.min(Math.max((window.innerHeight * 0.6 - r.top) / r.height, 0), 1);
+      tlFill.style.transform = "scaleY(" + p + ")";
+      var reached = p * r.height;
+      items.forEach(function (n) {
+        var dot = n.querySelector(".tl-dot");
+        n.classList.toggle("is-active", n.offsetTop + dot.offsetTop + 9 <= reached);
+      });
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  })();
+
   /* ---------- reveal on scroll ---------- */
+  document.querySelectorAll(".section__title").forEach(function (n) { n.classList.add("reveal"); });
   var items = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {

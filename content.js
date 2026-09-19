@@ -48,12 +48,24 @@ window.SITE = {
     { label: "Workshop",          target: "workshop" },
   ],
 
+  // Button on the right of the menu bar. Use "url" for a link, or "target" for a section.
+  navCta: { label: "Đăng ký", url: "https://zalo.me/0969801834" },
+
   /* ---------- Hero (top red banner) ---------- */
   hero: {
     description:
       "Mô hình các lớp học tiếng Tây Ban Nha online nhóm nhỏ, lớp kèm 1-1, kèm 1-2, kèm theo yêu cầu, các lớp giao tiếp, luyện thi DELE lấy chứng chỉ",
+    // Buttons. Use "url" for a link (opens in a new tab) or "target" for a section of this page.
+    ctaPrimary:   { label: "Đăng ký học thử",    url: "https://zalo.me/0969801834" },
+    ctaSecondary: { label: "Xem lịch khai giảng", target: "schedule" },
     contactPrompt: "Liên hệ để được tư vấn lớp học phù hợp",
+    // Photos in the scrolling columns on the right.
+    // Leave empty [] to automatically use the "Lớp học" + "Workshop" photos below.
+    photos: [],
   },
+
+  /* ---------- Scrolling word band (under the hero) ---------- */
+  ticker: ["¡Hola!", "Gracias", "¿Qué tal?", "Me encanta", "Buenos días", "¡Vamos!", "Mucho gusto", "Hasta luego"],
 
   /* ---------- Numbers (yellow block) ---------- */
   stats: [
@@ -73,11 +85,43 @@ window.SITE = {
     ],
   },
 
-  /* ---------- Giáo viên (accordion) ---------- */
-  // icon must be one of: degree, award, teacher, work, language
+  /* ---------- Giáo viên ---------- */
   teachers: {
     title: "Giáo viên",
     subtitle: "Toàn bộ giáo viên có chuyên môn, nghiệp vụ sư phạm và kinh nghiệm vững vàng",
+
+    // Teacher profiles — shown as a scrolling row of photo cards.
+    // Photos: portrait (taller than wide, about 4:5), e.g. "images/giao-vien-1.jpg".
+    // "role" = one short line under the name; "bio" = 1–3 sentences shown on hover / tap.
+    profiles: [
+      {
+        name: "Tên giáo viên 1",
+        role: "(Sửa) Thạc sĩ · ĐH Complutense de Madrid",
+        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên: kinh nghiệm, lớp phụ trách, phong cách dạy.",
+        photo: "images/giao-vien-1.jpg",
+      },
+      {
+        name: "Tên giáo viên 2",
+        role: "(Sửa) Cử nhân · ĐH Hà Nội",
+        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên.",
+        photo: "images/giao-vien-2.jpg",
+      },
+      {
+        name: "Tên giáo viên 3",
+        role: "(Sửa) Thủ khoa · ĐH KHXH&NV Tp.HCM",
+        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên.",
+        photo: "images/giao-vien-3.jpg",
+      },
+      {
+        name: "Tên giáo viên 4",
+        role: "(Sửa) Thạc sĩ · ĐH La Laguna",
+        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên.",
+        photo: "images/giao-vien-4.jpg",
+      },
+    ],
+
+    // Team strengths — shown as clickable chips above the profiles.
+    // icon must be one of: degree, award, teacher, work, language
     items: [
       {
         icon: "degree",
