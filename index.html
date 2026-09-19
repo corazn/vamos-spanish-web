@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VAMOS - Này học tiếng Tây Ban Nha đi</title>
+  <meta name="description" content="" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23cc2f4e'/%3E%3Ccircle cx='16' cy='17' r='8' fill='%23f2a93b'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Kanit:wght@600;700&family=Poltawski+Nowy:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <!-- Floating nav bar -->
+  <header class="nav" id="nav">
+    <div class="nav__bar">
+      <a href="#home" class="nav__logo" data-logo="small"></a>
+      <nav class="nav__links" data-nav="inline"></nav>
+      <button class="nav__toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav__menu" data-nav="menu"></nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <span class="hero__mark hero__mark--excl" aria-hidden="true">!</span>
+      <span class="hero__mark hero__mark--inv" aria-hidden="true">¡</span>
+      <div class="container hero__inner">
+        <div class="hero__logo" data-logo="big"></div>
+        <p class="hero__desc" data-text="hero.description"></p>
+        <p class="hero__prompt" data-text="hero.contactPrompt"></p>
+        <div class="socials" data-socials></div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="container stats__list" data-stats></div>
+    </section>
+
+    <!-- About / timeline -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section__title" data-text="about.title"></h2>
+        <ol class="timeline" data-timeline></ol>
+      </div>
+    </section>
+
+    <!-- Teachers -->
+    <section class="section" id="teachers">
+      <div class="container">
+        <h2 class="section__title" data-text="teachers.title"></h2>
+        <p class="section__subtitle" data-text="teachers.subtitle"></p>
+        <div class="accordion" data-accordion></div>
+      </div>
+    </section>
+
+    <!-- Classes gallery -->
+    <section class="section" id="classes">
+      <div class="container">
+        <h2 class="section__title" data-text="classes.title"></h2>
+        <div class="gallery" data-gallery></div>
+        <div class="gallery__more">
+          <button class="btn-dark" data-loadmore></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="section" id="schedule">
+      <div class="container">
+        <h2 class="section__title" data-text="schedule.title"></h2>
+        <div class="schedule" data-schedule></div>
+      </div>
+    </section>
+
+    <!-- Feedback -->
+    <section class="section" id="feedback">
+      <div class="container">
+        <h2 class="section__title" data-text="feedback.title"></h2>
+        <div class="phone-slider" data-feedback>
+          <div class="phone-slider__viewport"><div class="phone-slider__track"></div></div>
+          <button class="slider-btn slider-btn--prev" aria-label="Previous">‹</button>
+          <button class="slider-btn slider-btn--next" aria-label="Next">›</button>
+          <div class="dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workshop -->
+    <section class="section" id="workshop">
+      <div class="container">
+        <h2 class="section__title" data-text="workshop.title"></h2>
+      </div>
+      <div class="workshop" data-workshop>
+        <div class="workshop__track"></div>
+      </div>
+      <div class="container">
+        <p class="workshop__caption" data-text="workshop.caption"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__logo">¡vamos!</div>
+      <p class="footer__tagline" data-text="footer.tagline"></p>
+      <p class="footer__title" data-text="footer.contactTitle"></p>
+      <p class="footer__text" data-text="footer.contactText"></p>
+      <div class="socials" data-socials></div>
+      <div class="footer__bottom">
+        <p data-text="footer.copyright"></p>
+        <p data-text="footer.tagline"></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="assets/main.js"></script>
+</body>
+</html>
