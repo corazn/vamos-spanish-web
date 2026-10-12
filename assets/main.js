@@ -290,7 +290,10 @@
       class: "gallery__item" + (i >= shown ? " is-hidden" : ""),
       type: "button",
       "aria-label": "Xem ảnh lớp học " + (i + 1),
-    }, [img(src, "Lớp học VAMOS"), el("span", { class: "gallery__zoom", html: ZOOM, "aria-hidden": "true" })]);
+    }, [el("div", { class: "gallery__frame" }, [
+      img(src, "Lớp học VAMOS"),
+      el("span", { class: "gallery__zoom", html: ZOOM, "aria-hidden": "true" }),
+    ])]);
     item.addEventListener("click", function () { openLightbox(i); });
     gal.appendChild(item);
   });
