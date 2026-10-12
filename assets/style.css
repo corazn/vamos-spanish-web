@@ -1,16 +1,16 @@
 /* ============ Design tokens ============ */
 :root {
-  --red: #cc2f4e;
-  --red-dark: #85152b;
+  --red: #83162b;
+  --red-dark: #5a0e1d;
   --brick: #a13232;
   --yellow: #ffd76a;
   --orange: #f2a93b;
-  --cream: #faf7ef;
-  --cream-2: #edebe1;
+  --cream: #fffaf6;
+  --cream-2: #f4ece5;
   --card: #ffffff;
   --ink: #1f1919;
   --muted: #5e5e5e;
-  --line: #e6e1d4;
+  --line: #ebe2da;
   --footer: #221e1e;
 
   --font-body: "Barlow", system-ui, sans-serif;
@@ -427,13 +427,13 @@ a { color: inherit; }
 }
 .tl-item.is-active::after { background: var(--red); }
 .tl-item.is-active .tl-card {
-  border-color: rgba(204, 47, 78, 0.35);
+  border-color: rgba(131, 22, 43, 0.35);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(60, 40, 20, 0.05), 0 16px 36px rgba(161, 50, 50, 0.1);
 }
 @keyframes dotPulse {
-  0%   { box-shadow: 0 0 0 2px var(--red), 0 0 0 0 rgba(204, 47, 78, 0.5); }
-  100% { box-shadow: 0 0 0 2px var(--red), 0 0 0 14px rgba(204, 47, 78, 0); }
+  0%   { box-shadow: 0 0 0 2px var(--red), 0 0 0 0 rgba(131, 22, 43, 0.5); }
+  100% { box-shadow: 0 0 0 2px var(--red), 0 0 0 14px rgba(131, 22, 43, 0); }
 }
 
 /* slide in from the side */
