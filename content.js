@@ -152,7 +152,7 @@ window.SITE = {
   /* ---------- Lớp học (photo grid) ---------- */
   classes: {
     title: "Lớp học",
-    initialCount: 6,          // how many photos show before "Load More"
+    initialCount: 9,          // how many photos show before "Load More"
     loadMoreLabel: "Load More",
     photos: [
       "images/lop-hoc-1.png",

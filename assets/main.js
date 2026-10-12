@@ -284,8 +284,59 @@
   var moreBtn = document.querySelector("[data-loadmore]");
   var photos = get("classes.photos") || [];
   var shown = get("classes.initialCount") || 6;
+  var ZOOM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4M11 8v6M8 11h6"/></svg>';
   photos.forEach(function (src, i) {
-    gal.appendChild(el("div", { class: "gallery__item" + (i >= shown ? " is-hidden" : "") }, [img(src, "Lớp học VAMOS")]));
+    var item = el("button", {
+      class: "gallery__item" + (i >= shown ? " is-hidden" : ""),
+      type: "button",
+      "aria-label": "Xem ảnh lớp học " + (i + 1),
+    }, [img(src, "Lớp học VAMOS"), el("span", { class: "gallery__zoom", html: ZOOM, "aria-hidden": "true" })]);
+    item.addEventListener("click", function () { openLightbox(i); });
+    gal.appendChild(item);
+  });
+
+  /* ---------- lightbox ---------- */
+  var lbIndex = 0;
+  var lbImg = el("img", { alt: "" });
+  var lbCount = el("span", { class: "lightbox__count" });
+  var lbPrev = el("button", { class: "slider-btn slider-btn--prev", type: "button", "aria-label": "Ảnh trước", text: "‹" });
+  var lbNext = el("button", { class: "slider-btn slider-btn--next", type: "button", "aria-label": "Ảnh sau", text: "›" });
+  var lbClose = el("button", { class: "lightbox__close", type: "button", "aria-label": "Đóng", text: "×" });
+  var lb = el("div", { class: "lightbox", role: "dialog", "aria-modal": "true" }, [lbImg, lbCount, lbPrev, lbNext, lbClose]);
+  document.body.appendChild(lb);
+
+  function showLb(i) {
+    lbIndex = (i + photos.length) % photos.length;
+    lbImg.src = photos[lbIndex];
+    lbCount.textContent = (lbIndex + 1) + " / " + photos.length;
+  }
+  function openLightbox(i) {
+    showLb(i);
+    lb.classList.add("is-open");
+    document.body.classList.add("has-lightbox");
+    lbClose.focus();
+  }
+  function closeLightbox() {
+    lb.classList.remove("is-open");
+    document.body.classList.remove("has-lightbox");
+  }
+  lbPrev.addEventListener("click", function () { showLb(lbIndex - 1); });
+  lbNext.addEventListener("click", function () { showLb(lbIndex + 1); });
+  lbClose.addEventListener("click", closeLightbox);
+  lb.addEventListener("click", function (e) { if (e.target === lb) closeLightbox(); });
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") showLb(lbIndex - 1);
+    if (e.key === "ArrowRight") showLb(lbIndex + 1);
+  });
+  var lbX = null;
+  lb.addEventListener("touchstart", function (e) { lbX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", function (e) {
+    if (lbX === null) return;
+    var dx = e.changedTouches[0].clientX - lbX;
+    if (Math.abs(dx) > 40) showLb(lbIndex + (dx < 0 ? 1 : -1));
+    lbX = null;
   });
   moreBtn.textContent = get("classes.loadMoreLabel") || "Load More";
   moreBtn.hidden = photos.length <= shown;
