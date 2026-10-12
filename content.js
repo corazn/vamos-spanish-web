@@ -10,7 +10,8 @@
    - To add an item to a list, copy an existing { ... } block and paste
      it after a comma.
    - Images: put your files in the /images folder and write the path,
-     e.g. "images/lop-hoc-1.jpg". If a file is missing, the site shows
+     e.g. "images/lop-hoc-1.png" (.jpg, .png and .webp all work).
+     If a file is missing, the site shows
      a grey placeholder with the file name so you know what to add.
    ===================================================================== */
 
@@ -154,14 +155,23 @@ window.SITE = {
     initialCount: 6,          // how many photos show before "Load More"
     loadMoreLabel: "Load More",
     photos: [
-      "images/lop-hoc-1.jpg",
-      "images/lop-hoc-2.jpg",
-      "images/lop-hoc-3.jpg",
-      "images/lop-hoc-4.jpg",
-      "images/lop-hoc-5.jpg",
-      "images/lop-hoc-6.jpg",
-      "images/lop-hoc-7.jpg",
-      "images/lop-hoc-8.jpg",
+      "images/lop-hoc-1.png",
+      "images/lop-hoc-2.png",
+      "images/lop-hoc-3.png",
+      "images/lop-hoc-4.png",
+      "images/lop-hoc-5.png",
+      "images/lop-hoc-6.png",
+      "images/lop-hoc-7.png",
+      "images/lop-hoc-8.png",
+      "images/lop-hoc-9.png",
+      "images/lop-hoc-10.png",
+      "images/lop-hoc-11.png",
+      "images/lop-hoc-12.png",
+      "images/lop-hoc-13.png",
+      "images/lop-hoc-14.png",
+      "images/lop-hoc-15.png",
+      "images/lop-hoc-16.png",
+      "images/lop-hoc-17.png",
     ],
   },
 
