@@ -143,17 +143,6 @@
     });
   })();
 
-  /* ---------- word ticker ---------- */
-  (function () {
-    var track = document.querySelector("[data-ticker]");
-    var words = S.ticker || [];
-    if (!words.length) { track.closest(".ticker").remove(); return; }
-    // repeat so one half is wider than any screen, then duplicate for the loop
-    var half = words.slice();
-    while (half.length < 16) half = half.concat(words);
-    half.concat(half).forEach(function (w) { track.appendChild(el("span", { text: w })); });
-  })();
-
   /* ---------- socials ---------- */
   document.querySelectorAll("[data-socials]").forEach(function (box) {
     (S.socials || []).forEach(function (s) {

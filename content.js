@@ -64,9 +64,6 @@ window.SITE = {
     photos: [],
   },
 
-  /* ---------- Scrolling word band (under the hero) ---------- */
-  ticker: ["¡Hola!", "Gracias", "¿Qué tal?", "Me encanta", "Buenos días", "¡Vamos!", "Mucho gusto", "Hasta luego"],
-
   /* ---------- Numbers (yellow block) ---------- */
   stats: [
     { number: "+ 230", label: "lớp học đã khai giảng" },

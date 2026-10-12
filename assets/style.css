@@ -269,41 +269,8 @@ a { color: inherit; }
 .btn--ghost { color: #fff; border: 2px solid rgba(255, 255, 255, 0.55); padding: 12px 22px; }
 .btn--ghost:hover { background: rgba(255, 255, 255, 0.12); }
 
-/* ============ Ticker ============ */
-.ticker {
-  position: relative;
-  z-index: 3;
-  overflow: hidden;
-  padding: 24px 0;
-  margin: -52px 0 -48px;
-  pointer-events: none;
-}
-.ticker__band {
-  margin: 0 -5%;
-  background: var(--ink);
-  transform: rotate(-2deg);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-}
-.ticker__track {
-  display: flex; width: max-content;
-  padding: 14px 0;
-  animation: marquee 32s linear infinite;
-}
-.ticker__track span {
-  font-family: var(--font-logo);
-  font-weight: 600;
-  font-size: clamp(18px, 2.4vw, 24px);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #fbeee4;
-  white-space: nowrap;
-  padding: 0 20px;
-}
-.ticker__track span::after { content: "\2726"; color: var(--orange); margin-left: 40px; }
-
 @media (prefers-reduced-motion: reduce) {
-  .hero__track, .ticker__track, .hero__text > *, .hero__cols { animation: none; }
+  .hero__track, .hero__text > *, .hero__cols { animation: none; }
 }
 
 /* ============ Socials ============ */
@@ -331,13 +298,36 @@ a { color: inherit; }
   margin-top: -30px;
   background: var(--yellow);
   border-radius: 28px 28px 0 0;
-  padding: 64px 0 40px;
+  padding: 56px 0;
   z-index: 2;
 }
-.stats__list { display: grid; gap: 14px; }
-.stat { display: flex; align-items: center; gap: 18px; }
-.stat__num { font-size: 48px; font-weight: 600; min-width: 120px; font-variant-numeric: tabular-nums; }
-.stat__label { font-size: 18px; font-weight: 500; }
+.stats__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+.stat {
+  text-align: center;
+  padding: 8px 20px;
+}
+.stat + .stat { border-left: 1px solid rgba(31, 25, 25, 0.18); }
+.stat__num {
+  display: block;
+  font-size: clamp(52px, 7vw, 76px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.stat__label {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--brick);
+}
 
 /* ============ Sections ============ */
 .section { padding: 110px 0 40px; }
@@ -736,8 +726,7 @@ a { color: inherit; }
   .hero { padding: 120px 0 90px; }
   .hero__mark--excl { font-size: 170px; }
   .hero__mark--inv { font-size: 160px; }
-  .stat__num { font-size: 40px; min-width: 100px; }
-  .stat__label { font-size: 16px; }
+  .stat { padding: 8px 10px; }
   .section { padding-top: 80px; }
   .tl-card p, .course__code { font-size: 16px; }
   .tl-card { padding: 18px 20px; }
