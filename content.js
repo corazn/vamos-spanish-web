@@ -222,7 +222,7 @@ window.SITE = {
 
   /* ---------- Feedback học viên (screenshot slider) ---------- */
   feedback: {
-    title: "Feedback\nhọc viên",   // \n = line break
+    title: "Feedback học viên",    // use \n for a line break
     images: [
       "images/feedback-1.jpg",
       "images/feedback-2.jpg",
