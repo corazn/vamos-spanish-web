@@ -24,8 +24,10 @@ window.SITE = {
   },
 
   // Leave logoImage empty ("") to use the built-in text logo "¡vamos!".
-  // Or set it to your own logo file, e.g. "images/logo.png".
-  logoImage: "",
+  // Or set it to your own logo file, e.g. "images/logo.svg".
+  logoImage: "images/logo-header.svg",       // menu bar (white background)
+  logoImageCover: "images/logo-footer.svg",  // top red banner (version with tagline)
+  logoImageFooter: "images/logo-footer.svg", // footer (dark background)
   logoTagline: "Này, học tiếng Tây Ban Nha đi",
 
   /* ---------- Social / contact links ---------- */
@@ -93,28 +95,58 @@ window.SITE = {
     // "role" = one short line under the name; "bio" = 1–3 sentences shown on hover / tap.
     profiles: [
       {
-        name: "Tên giáo viên 1",
-        role: "(Sửa) Thạc sĩ · ĐH Complutense de Madrid",
-        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên: kinh nghiệm, lớp phụ trách, phong cách dạy.",
+        name: "Cô Mẫn Nhi",
+        role: "Hiệu trưởng Vamos",
+        bio: "Thủ khoa đầu ra ngành ngôn ngữ Tây Ban Nha - Đại học KHXH&NV TP.HCM | Trên 5 năm kinh nghiệm dạy tiếng Tây Ban nha",
         photo: "images/giao-vien-1.jpg",
       },
       {
-        name: "Tên giáo viên 2",
-        role: "(Sửa) Cử nhân · ĐH Hà Nội",
-        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên.",
+        name: "Cô Đồng Đào",
+        role: "Giáo viên Vamos",
+        bio: "Thư ký thương vụ Đại Sứ Quán Tây Ban Nha | 10 năm giảng dạy tiếng Tây Ban Nha 10 năm kinh nghiệm làm phiên dịch viên tự do cho các tổ chức, sự kiện và hội nghị đa quốc gia",
         photo: "images/giao-vien-2.jpg",
       },
       {
-        name: "Tên giáo viên 3",
-        role: "(Sửa) Thủ khoa · ĐH KHXH&NV Tp.HCM",
-        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên.",
+        name: "Cô Ngọc Tú",
+        role: "Giáo viên Vamos",
+        bio: "Đang theo học thạc sĩ Đại học về Đào tạo giáo viên, đào tạo nghề và giảng dạy ngoại ngữ tại trường Đại Học Ceu San Pablo, Tây Ban Nha | Trên 4 năm kinh nghiệm dạy tiếng Tây Ban Nha",
         photo: "images/giao-vien-3.jpg",
       },
       {
-        name: "Tên giáo viên 4",
-        role: "(Sửa) Thạc sĩ · ĐH La Laguna",
-        bio: "(Sửa nội dung này) Vài câu giới thiệu ngắn về giáo viên.",
+        name: "Thầy Tấn Bảo",
+        role: "Giáo viên Vamos",
+        bio: "Cử nhân ngôn ngữ Tây Ban Nha - ĐH KHXH&NV TP.HCM | Chứng chỉ tiếng Tây Ban Nha DELE C1 | Hơn 7 năm kinh nghiệm dạy tiếng Tây Ban Nha",
         photo: "images/giao-vien-4.jpg",
+      },
+      {
+        name: "Cô Vân Anh",
+        role: "Giáo viên Vamos",
+        bio: "Cử nhân Ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Hơn 7 năm kinh nghiệm giảng dạy tiếng Tây Ban Nha và tiếng Anh | MC song ngữ Tây Ban Nha - Anh, phiên biên dịch tự do",
+        photo: "images/giao-vien-5.jpg",
+      },
+      {
+        name: "Cô Mỹ Hảo",
+        role: "Giáo viên Vamos",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, ĐH KHXH&NV TP.HCM | Hơn 7 năm dạy tiếng Anh và tiếng Tây Ban Nha | Làm việc trong lĩnh vực công nghệ thông tin, phân tích và đánh giá dữ liệu",
+        photo: "images/giao-vien-6.jpg",
+      },
+      {
+        name: "Cô Ngọc Minh",
+        role: "Giáo viên Vamos",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Đang theo học thạc sĩ chuyên ngành giảng dạy tiếng Tây Ban Nha tại trường ĐH Universidad Antonio de Nebrija (Tây Ban Nha)",
+        photo: "images/giao-vien-7.jpg",
+      },
+      {
+        name: "Cô Khánh Linh",
+        role: "Giáo viên Vamos",
+        bio: "Thạc sĩ Thiết kế trải nghiệm số - Đại học BAU, Barcelona (Tây Ban Nha) | Cử nhân loại giỏi ngành Mỹ Thuật - Đại học La Laguna (Tây Ban Nha) | Hơn 7 năm sinh sống, học tập và làm việc thực tế tại Tây Ban Nha",
+        photo: "images/giao-vien-8.jpg",
+      },
+      {
+        name: "Cô Xuân Thơ",
+        role: "Giáo viên Vamos",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (Hanu) | Học bổng trao đổi sinh Erasmus + tại trường ĐH Sevilla (Tây Ban Nha) | Từng là trợ lý văn hóa và báo chí của Đại Sứ Quán Venezuela",
+        photo: "images/giao-vien-9.jpg",
       },
     ],
 
@@ -129,7 +161,7 @@ window.SITE = {
       {
         icon: "award",
         title: "Đào tạo nghiệp vụ",
-        text: "(Sửa nội dung này) Giáo viên được đào tạo nghiệp vụ sư phạm giảng dạy tiếng Tây Ban Nha như một ngoại ngữ.",
+        text: "Toàn bộ giáo viên đều được đào tạo theo quy trình và tiêu chuẩn phát triển chung của Vamos: năng động, nhiệt huyết, kết hợp nhiều hoạt động trò chơi tại lớp, chú trọng vào tương tác và thực hành ngay tại lớp.",
       },
       {
         icon: "teacher",
@@ -139,12 +171,12 @@ window.SITE = {
       {
         icon: "work",
         title: "Kinh nghiệm làm việc",
-        text: "(Sửa nội dung này) Kinh nghiệm làm việc thực tế trong môi trường sử dụng tiếng Tây Ban Nha.",
+        text: "Kinh nghiệm phiên dịch tại các hội nghị, hội chợ thương mại cho các nước nói tiếng TBN.",
       },
       {
         icon: "language",
         title: "Sử dụng song ngữ trong lớp",
-        text: "(Sửa nội dung này) Giáo viên sử dụng song ngữ Việt - Tây Ban Nha để học viên dễ tiếp thu.",
+        text: "Sử dụng song ngữ Tây Ban Nha - Việt trong quá trình giảng dạy, giúp học viên dễ dàng tiếp thu kiến thức và phát triển kỹ năng giao tiếp.",
       },
     ],
   },

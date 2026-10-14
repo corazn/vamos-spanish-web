@@ -34,10 +34,11 @@
     image.addEventListener("error", function () { wrapFallback(image); });
     return image;
   }
-  function logo(withTag) {
+  function logo(withTag, image) {
     var box = el("span", { class: "logo" });
-    if (S.logoImage) {
-      box.appendChild(el("img", { src: S.logoImage, alt: "VAMOS" }));
+    var src = image || S.logoImage;
+    if (src) {
+      box.appendChild(el("img", { src: src, alt: "VAMOS" }));
       return box;
     }
     box.appendChild(el("span", { class: "logo__word", html: "¡vam<span class=\"logo__o\"></span>s!" }));
@@ -79,7 +80,8 @@
 
   /* ---------- logos ---------- */
   document.querySelectorAll('[data-logo="small"]').forEach(function (n) { n.appendChild(logo(false)); });
-  document.querySelectorAll('[data-logo="big"]').forEach(function (n) { n.appendChild(logo(true)); });
+  document.querySelectorAll('[data-logo="big"]').forEach(function (n) { n.appendChild(logo(true, S.logoImageCover)); });
+  document.querySelectorAll('[data-logo="footer"]').forEach(function (n) { n.appendChild(logo(false, S.logoImageFooter)); });
 
   /* ---------- nav ---------- */
   var nav = document.getElementById("nav");
