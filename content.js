@@ -42,7 +42,6 @@ window.SITE = {
   /* ---------- Menu ---------- */
   // "target" is the id of a section below (home, about, teachers, classes, schedule, feedback, workshop)
   nav: [
-    { label: "Home",              target: "home" },
     { label: "Về VAMOS",          target: "about" },
     { label: "Giáo viên",         target: "teachers" },
     { label: "Lớp học thực tế",   target: "classes" },
@@ -90,9 +89,12 @@ window.SITE = {
     title: "Giáo viên",
     subtitle: "Toàn bộ giáo viên có chuyên môn, nghiệp vụ sư phạm và kinh nghiệm vững vàng",
 
-    // Teacher profiles — shown as a scrolling row of photo cards.
-    // Photos: portrait (taller than wide, about 4:5), e.g. "images/giao-vien-1.jpg".
-    // "role" = one short line under the name; "bio" = 1–3 sentences shown on hover / tap.
+    // Teacher profiles — shown as a scrolling row of cards (photo on top, text below).
+    // "photo": any shape works, it's cropped to fit, e.g. "images/giao-vien-1.jpg".
+    // "role": shown as a small badge under the name — leave it "" for no badge.
+    // "bio": credentials separated by "|" — each part becomes one bullet point.
+    // "focus" (optional): where the face is in the photo, e.g. "75% 50%" (left→right, top→bottom),
+    //   so it isn't cropped out.
     profiles: [
       {
         name: "Cô Mẫn Nhi",
@@ -102,51 +104,54 @@ window.SITE = {
       },
       {
         name: "Cô Đồng Đào",
-        role: "Giáo viên Vamos",
-        bio: "Thư ký thương vụ Đại Sứ Quán Tây Ban Nha | 10 năm giảng dạy tiếng Tây Ban Nha 10 năm kinh nghiệm làm phiên dịch viên tự do cho các tổ chức, sự kiện và hội nghị đa quốc gia",
+        role: "",
+        bio: "Thư ký thương vụ Đại Sứ Quán Tây Ban Nha | 10 năm giảng dạy tiếng Tây Ban Nha | 10 năm kinh nghiệm làm phiên dịch viên tự do cho các tổ chức, sự kiện và hội nghị đa quốc gia",
         photo: "images/giao-vien-2.jpg",
+        focus: "78% 50%",
       },
       {
         name: "Cô Ngọc Tú",
-        role: "Giáo viên Vamos",
+        role: "",
         bio: "Đang theo học thạc sĩ Đại học về Đào tạo giáo viên, đào tạo nghề và giảng dạy ngoại ngữ tại trường Đại Học Ceu San Pablo, Tây Ban Nha | Trên 4 năm kinh nghiệm dạy tiếng Tây Ban Nha",
         photo: "images/giao-vien-3.jpg",
       },
       {
         name: "Thầy Tấn Bảo",
-        role: "Giáo viên Vamos",
+        role: "",
         bio: "Cử nhân ngôn ngữ Tây Ban Nha - ĐH KHXH&NV TP.HCM | Chứng chỉ tiếng Tây Ban Nha DELE C1 | Hơn 7 năm kinh nghiệm dạy tiếng Tây Ban Nha",
         photo: "images/giao-vien-4.jpg",
       },
       {
         name: "Cô Vân Anh",
-        role: "Giáo viên Vamos",
+        role: "",
         bio: "Cử nhân Ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Hơn 7 năm kinh nghiệm giảng dạy tiếng Tây Ban Nha và tiếng Anh | MC song ngữ Tây Ban Nha - Anh, phiên biên dịch tự do",
         photo: "images/giao-vien-5.jpg",
       },
       {
         name: "Cô Mỹ Hảo",
-        role: "Giáo viên Vamos",
+        role: "",
         bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, ĐH KHXH&NV TP.HCM | Hơn 7 năm dạy tiếng Anh và tiếng Tây Ban Nha | Làm việc trong lĩnh vực công nghệ thông tin, phân tích và đánh giá dữ liệu",
         photo: "images/giao-vien-6.jpg",
       },
       {
         name: "Cô Ngọc Minh",
-        role: "Giáo viên Vamos",
+        role: "",
         bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Đang theo học thạc sĩ chuyên ngành giảng dạy tiếng Tây Ban Nha tại trường ĐH Universidad Antonio de Nebrija (Tây Ban Nha)",
         photo: "images/giao-vien-7.jpg",
       },
       {
         name: "Cô Khánh Linh",
-        role: "Giáo viên Vamos",
+        role: "",
         bio: "Thạc sĩ Thiết kế trải nghiệm số - Đại học BAU, Barcelona (Tây Ban Nha) | Cử nhân loại giỏi ngành Mỹ Thuật - Đại học La Laguna (Tây Ban Nha) | Hơn 7 năm sinh sống, học tập và làm việc thực tế tại Tây Ban Nha",
         photo: "images/giao-vien-8.jpg",
+        focus: "73% 50%",
       },
       {
         name: "Cô Xuân Thơ",
-        role: "Giáo viên Vamos",
+        role: "",
         bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (Hanu) | Học bổng trao đổi sinh Erasmus + tại trường ĐH Sevilla (Tây Ban Nha) | Từng là trợ lý văn hóa và báo chí của Đại Sứ Quán Venezuela",
         photo: "images/giao-vien-9.jpg",
+        focus: "62% 45%",
       },
     ],
 
@@ -278,7 +283,6 @@ window.SITE = {
 
   /* ---------- Footer ---------- */
   footer: {
-    tagline: "Này học tiếng Tây Ban Nha đi",
     contactTitle: "Liên hệ",
     contactText: "Cần tư vấn lớp phù hợp? Nhắn VAMOS ngay nhé!",
     copyright: "© 2026 VAMOS. All rights reserved.",

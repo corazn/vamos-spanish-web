@@ -101,6 +101,32 @@
   });
   document.addEventListener("click", function (e) { if (!nav.contains(e.target)) setMenu(false); });
 
+  // highlight the menu item of the section being read
+  (function () {
+    var links = nav.querySelectorAll("[data-nav] a");
+    var sections = (S.nav || []).map(function (item) { return document.getElementById(item.target); }).filter(Boolean);
+    if (!sections.length) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var line = window.scrollY + 100;   // just below the floating nav (scroll-padding-top: 90px)
+      var active = null;
+      sections.forEach(function (s) { if (s.offsetTop <= line) active = s.id; });
+      // the last section can be too short to reach the line, so pick it at the bottom of the page
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) active = sections[sections.length - 1].id;
+      links.forEach(function (a) {
+        var on = a.getAttribute("href") === "#" + active;
+        a.classList.toggle("is-active", on);
+        if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+      });
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("load", update);
+    update();
+  })();
+
   /* ---------- buttons (nav + hero) ---------- */
   // { label, url } opens a link in a new tab; { label, target } jumps to a section
   function linkAttrs(item, attrs) {
@@ -249,16 +275,18 @@
     var list = get("teachers.profiles") || [];
     if (!list.length) { box.remove(); return; }
     list.forEach(function (t) {
-      var card = el("article", { class: "tcard", tabindex: "0", "aria-label": t.name }, [
-        el("div", { class: "tcard__photo" }, [img(t.photo, t.name)]),
-        el("div", { class: "tcard__panel" }, [
+      var photo = img(t.photo, t.name);
+      if (t.focus) photo.style.objectPosition = t.focus;
+      // "|" in the bio separates the bullet points
+      var creds = (t.bio || "").split("|").map(function (s) { return s.trim(); }).filter(Boolean);
+      var card = el("article", { class: "tcard", "aria-label": t.name }, [
+        el("div", { class: "tcard__photo" }, [photo]),
+        el("div", { class: "tcard__body" }, [
           el("h3", { class: "tcard__name", text: t.name }),
-          t.role ? el("p", { class: "tcard__role", text: t.role }) : null,
-          t.bio ? el("div", { class: "tcard__bio" }, [el("p", { text: t.bio })]) : null,
+          t.role ? el("span", { class: "tcard__badge", text: t.role }) : null,
+          creds.length ? el("ul", { class: "tcard__creds" }, creds.map(function (c) { return el("li", { text: c }); })) : null,
         ]),
       ]);
-      // tap to show / hide the bio on touch screens
-      card.addEventListener("click", function () { card.classList.toggle("is-open"); });
       track.appendChild(card);
     });
     var btns = box.querySelectorAll(".round-btn");
