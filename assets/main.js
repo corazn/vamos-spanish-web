@@ -330,6 +330,7 @@
 
   /* ---------- lightbox ---------- */
   var lbIndex = 0;
+  var lbList = photos;   // the images the lightbox steps through (class photos or feedback screenshots)
   var lbImg = el("img", { alt: "" });
   var lbCount = el("span", { class: "lightbox__count" });
   var lbPrev = el("button", { class: "slider-btn slider-btn--prev", type: "button", "aria-label": "Ảnh trước", text: "‹" });
@@ -339,11 +340,12 @@
   document.body.appendChild(lb);
 
   function showLb(i) {
-    lbIndex = (i + photos.length) % photos.length;
-    lbImg.src = photos[lbIndex];
-    lbCount.textContent = (lbIndex + 1) + " / " + photos.length;
+    lbIndex = (i + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIndex];
+    lbCount.textContent = (lbIndex + 1) + " / " + lbList.length;
   }
-  function openLightbox(i) {
+  function openLightbox(i, list) {
+    lbList = list || photos;
     showLb(i);
     lb.classList.add("is-open");
     document.body.classList.add("has-lightbox");
@@ -406,37 +408,33 @@
     sch.appendChild(course);
   });
 
-  /* ---------- feedback slider ---------- */
+  /* ---------- feedback quote cards ---------- */
   (function () {
-    var root = document.querySelector("[data-feedback]");
-    var track = root.querySelector(".phone-slider__track");
-    var dots = root.querySelector(".dots");
-    var list = get("feedback.images") || [];
-    var idx = 0;
-    list.forEach(function (src, i) {
-      track.appendChild(el("div", null, [img(src, "Feedback học viên")]));
-      var dot = el("button", { "aria-label": "Slide " + (i + 1) });
-      dot.addEventListener("click", function () { go(i); });
-      dots.appendChild(dot);
+    var box = document.querySelector("[data-feedback]");
+    var items = get("feedback.items") || [];
+    // the screenshots, in card order, so the lightbox can step through them
+    var proofs = items.map(function (f) { return f.image; }).filter(Boolean);
+    items.forEach(function (f) {
+      var name = f.name || "Học viên Vamos";
+      var meta = f.class ? "Lớp " + f.class : "";
+      var proof = null;
+      if (f.image) {
+        proof = el("button", { class: "quote__proof", type: "button", text: get("feedback.proofLabel") || "Xem tin nhắn gốc" });
+        proof.addEventListener("click", function () { openLightbox(proofs.indexOf(f.image), proofs); });
+      }
+      box.appendChild(el("article", { class: "quote reveal" }, [
+        el("span", { class: "quote__mark", text: "“", "aria-hidden": "true" }),
+        el("p", { class: "quote__text", text: f.quote }),
+        el("div", { class: "quote__foot" }, [
+          el("span", { class: "quote__av", text: name.charAt(0), "aria-hidden": "true" }),
+          el("div", { class: "quote__who" }, [
+            el("div", { class: "quote__name", text: name }),
+            meta ? el("div", { class: "quote__meta", text: meta }) : null,
+          ]),
+          proof,
+        ]),
+      ]));
     });
-    function go(i) {
-      if (!list.length) return;
-      idx = (i + list.length) % list.length;
-      track.style.transform = "translateX(" + (-idx * 100) + "%)";
-      dots.querySelectorAll("button").forEach(function (b, j) { b.classList.toggle("is-active", j === idx); });
-    }
-    root.querySelector(".slider-btn--prev").addEventListener("click", function () { go(idx - 1); });
-    root.querySelector(".slider-btn--next").addEventListener("click", function () { go(idx + 1); });
-    // swipe on touch screens
-    var x0 = null;
-    track.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener("touchend", function (e) {
-      if (x0 === null) return;
-      var dx = e.changedTouches[0].clientX - x0;
-      if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
-      x0 = null;
-    });
-    go(0);
   })();
 
   /* ---------- workshop marquee ---------- */

@@ -107,7 +107,7 @@ window.SITE = {
         role: "",
         bio: "Thư ký thương vụ Đại Sứ Quán Tây Ban Nha | 10 năm giảng dạy tiếng Tây Ban Nha | 10 năm kinh nghiệm làm phiên dịch viên tự do cho các tổ chức, sự kiện và hội nghị đa quốc gia",
         photo: "images/giao-vien-2.jpg",
-        focus: "78% 50%",
+        focus: "50% 25%",
       },
       {
         name: "Cô Ngọc Tú",
@@ -118,7 +118,7 @@ window.SITE = {
       {
         name: "Thầy Tấn Bảo",
         role: "",
-        bio: "Cử nhân ngôn ngữ Tây Ban Nha - ĐH KHXH&NV TP.HCM | Chứng chỉ tiếng Tây Ban Nha DELE C1 | Hơn 7 năm kinh nghiệm dạy tiếng Tây Ban Nha",
+        bio: "Cử nhân ngôn ngữ Tây Ban Nha - Đại học KHXH&NV TP.HCM | Chứng chỉ tiếng Tây Ban Nha DELE C1 | Hơn 7 năm kinh nghiệm dạy tiếng Tây Ban Nha",
         photo: "images/giao-vien-4.jpg",
       },
       {
@@ -130,11 +130,11 @@ window.SITE = {
       {
         name: "Cô Mỹ Hảo",
         role: "",
-        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, ĐH KHXH&NV TP.HCM | Hơn 7 năm dạy tiếng Anh và tiếng Tây Ban Nha | Làm việc trong lĩnh vực công nghệ thông tin, phân tích và đánh giá dữ liệu",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, Đại học KHXH&NV TP.HCM | Hơn 7 năm dạy tiếng Anh và tiếng Tây Ban Nha | Làm việc trong lĩnh vực công nghệ thông tin, phân tích và đánh giá dữ liệu",
         photo: "images/giao-vien-6.jpg",
       },
       {
-        name: "Cô Ngọc Minh",
+        name: "Cô Minh Nguyễn",
         role: "",
         bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Đang theo học thạc sĩ chuyên ngành giảng dạy tiếng Tây Ban Nha tại trường ĐH Universidad Antonio de Nebrija (Tây Ban Nha)",
         photo: "images/giao-vien-7.jpg",
@@ -149,9 +149,21 @@ window.SITE = {
       {
         name: "Cô Xuân Thơ",
         role: "",
-        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (Hanu) | Học bổng trao đổi sinh Erasmus + tại trường ĐH Sevilla (Tây Ban Nha) | Từng là trợ lý văn hóa và báo chí của Đại Sứ Quán Venezuela",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Học bổng trao đổi sinh Erasmus + tại trường ĐH Sevilla (Tây Ban Nha) | Từng là trợ lý văn hóa và báo chí của Đại Sứ Quán Venezuela",
         photo: "images/giao-vien-9.jpg",
         focus: "62% 45%",
+      },
+      {
+        name: "Thầy Ngọc Việt",
+        role: "",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, ĐH Hà Nội (HANU) | Học bổng trao đổi sinh Erasmus+ tại ĐH Granada, Tây Ban Nha | Hơn 2 năm kinh nghiệm làm việc trong môi trường nói tiếng Tây Ban Nha như du lịch, dịch thuật, giảng dạy",
+        photo: "images/giao-vien-10.jpg",
+      },
+      {
+        name: "Cô Ngọc Du",
+        role: "",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, ĐH Hà Nội (HANU) | 4 năm kinh nghiệm giảng dạy ngoại ngữ, sở hữu nền tảng kiến thức vững chắc về văn hoá Tây Ban Nha - Mỹ Latinh",
+        photo: "images/giao-vien-11.jpg",
       },
     ],
 
@@ -257,15 +269,62 @@ window.SITE = {
     ],
   },
 
-  /* ---------- Feedback học viên (screenshot slider) ---------- */
+  /* ---------- Feedback học viên (quote cards) ---------- */
   feedback: {
     title: "Feedback học viên",    // use \n for a line break
-    images: [
-      "images/feedback-1.jpg",
-      "images/feedback-2.jpg",
-      "images/feedback-3.jpg",
-      "images/feedback-4.jpg",
-      "images/feedback-5.jpg",
+    subtitle: "Hơn 900 học viên đã đồng hành cùng Vamos",
+    proofLabel: "Xem tin nhắn gốc",
+    // One card per student:
+    // "quote"   = the student's own words (keep it short)
+    // "name"    = first name only — leave "" to show "Học viên Vamos"
+    // "class"   = shown under the name, e.g. "A1.1" (leave "" to hide)
+    // "image"   = the original chat screenshot, opened by the "Xem tin nhắn gốc" button ("" to hide it)
+    items: [
+      {
+        quote: "Lớp học luôn trong không khí sôi động, không bị chán. Cô dạy với nhịp độ phù hợp, giảng rất dễ hiểu ạ.",
+        name: "Ngọc Anh", class: "A1.1",
+        image: "images/feedback-7.jpg",
+      },
+      {
+        quote: "Thầy siêu hiền và dễ tính, còn rất kiên nhẫn giải thích từng từ cho mọi người học. Em thấy may mắn khi được học thầy ạ.",
+        name: "Diễm Quỳnh", class: "B1.2",
+        image: "images/feedback-5.jpg",
+      },
+      {
+        quote: "Lớp học rất vui, cô dạy bài vừa dễ hiểu vừa rất tận tình tận tâm. Cô còn giúp em giải đáp thắc mắc và sửa lỗi rất nhiều ạ.",
+        name: "Trinh", class: "A1.1",
+        image: "images/feedback-8.jpg",
+      },
+      {
+        quote: "Cô Vân Anh dạy khá kĩ và phù hợp với mình nên mình không có khó khăn gì.",
+        name: "Trang", class: "A1.2",
+        image: "images/feedback-2.jpg",
+      },
+      {
+        quote: "Em thấy ổn lắm ạ, thầy dạy dễ hiểu, cũng vui tính nữa ạ.",
+        name: "Bảo Hân", class: "A1.1",
+        image: "images/feedback-9.jpg",
+      },
+      {
+        quote: "Em thấy rất ổn ạ. Cô dạy kĩ và rất hỗ trợ học viên ạ.",
+        name: "Minh Châu", class: "A2.1",
+        image: "images/feedback-4.jpg",
+      },
+      {
+        quote: "Học với thầy Bảo từ khoá A1 nên em quen với tiến độ giảng dạy của thầy, ngày càng suôn sẻ hơn.",
+        name: "Lam", class: "A2.2",
+        image: "images/feedback-1.jpg",
+      },
+      {
+        quote: "Thầy Bảo dạy ổn lắm, phù hợp với chị.",
+        name: "", class: "B1.1",
+        image: "images/feedback-6.jpg",
+      },
+      {
+        quote: "Mình thấy tiến độ học vừa phải. Cô giáo cho học sinh luyện tập nhiều.",
+        name: "Billy", class: "A1.1",
+        image: "images/feedback-3.jpg",
+      },
     ],
   },
 

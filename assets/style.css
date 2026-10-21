@@ -734,16 +734,45 @@ body.has-lightbox { overflow: hidden; }
   font-variant-numeric: tabular-nums;
 }
 
-/* ============ Feedback phone slider ============ */
-.phone-slider {
-  position: relative;
-  max-width: 340px;
-  margin: 48px auto 0;
+/* ============ Feedback quote cards ============ */
+.quotes { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 40px; }
+.quote {
+  display: flex; flex-direction: column;
+  background: var(--card); border-radius: 20px;
+  padding: 26px 24px 20px;
+  box-shadow: 0 2px 4px rgba(60, 40, 20, 0.04), 0 10px 28px rgba(60, 40, 20, 0.08);
 }
-.phone-slider__viewport { overflow: hidden; border-radius: 22px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); }
-.phone-slider__track { display: flex; transition: transform 0.45s ease; }
-.phone-slider__track > * { flex: 0 0 100%; aspect-ratio: 1179 / 1350; background: #e8eaf4; }
-.phone-slider__track img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.quote__mark { font: 700 64px/0.6 Georgia, serif; color: var(--orange); height: 28px; }
+.quote__text { flex: 1; margin: 10px 0 22px; font-size: 19px; line-height: 1.5; }
+.quote__foot { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+.quote__av {
+  flex: none; width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #f9e6e0; color: var(--brick);
+  font-family: var(--font-head); font-weight: 600; font-size: 16px;
+}
+.quote__who { flex: 1; min-width: 0; }
+.quote__name { font-weight: 600; font-size: 15px; }
+.quote__meta { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.quote__proof {
+  flex: none; padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card);
+  color: var(--brick); font: inherit; font-size: 13px; font-weight: 500; white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.quote__proof:hover { background: var(--brick); border-color: var(--brick); color: #fff; }
+@media (max-width: 600px) {
+  /* swipe row instead of a long stack of cards */
+  .quotes {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-right: -16px; padding: 4px 16px 16px 0;
+  }
+  .quotes::-webkit-scrollbar { display: none; }
+  .quote { flex: 0 0 82vw; scroll-snap-align: start; }
+  .quote__text { font-size: 17px; }
+}
+
+/* slider arrows (used by the lightbox) */
 .slider-btn {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 40px; height: 40px; border-radius: 50%;
@@ -753,12 +782,6 @@ body.has-lightbox { overflow: hidden; }
 .slider-btn:hover { background: rgba(0, 0, 0, 0.55); }
 .slider-btn--prev { left: 14px; }
 .slider-btn--next { right: 14px; }
-.dots {
-  position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
-  display: flex; gap: 8px; padding: 6px 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.18);
-}
-.dots button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.55); }
-.dots button.is-active { background: #fff; }
 
 /* ============ Workshop slider ============ */
 .workshop { margin-top: 48px; overflow: hidden; }

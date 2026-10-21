@@ -16,9 +16,11 @@ Open `content.js` in any text editor and change the text inside the quotes.
 Keep the quotes and the commas between items.
 
 - **Schedule**: `schedule.courses` → add/remove `{ code, days, time, start }` rows.
-- **Photos**: copy images into `images/` and list them in `classes.photos`,
-  `feedback.images` or `workshop.images`. Any missing file shows a striped
+- **Photos**: copy images into `images/` and list them in `classes.photos`
+  or `workshop.images`. Any missing file shows a striped
   placeholder that says which file name it expects.
+- **Feedback**: `feedback.items` — one `{ quote, name, class, image }` per student.
+  `image` is the original chat screenshot, opened by the "Xem tin nhắn gốc" button.
 - **Teachers**: `teachers.profiles` — one `{ name, role, bio, photo }` per teacher (portrait photos, ~4:5).
   `teachers.items` are the team-strength chips above them.
 - **Hero photo columns**: `hero.photos` (leave `[]` to reuse the class + workshop photos).
