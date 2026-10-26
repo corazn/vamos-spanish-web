@@ -546,7 +546,7 @@ a { color: inherit; }
   overflow: hidden;
   scroll-snap-align: start;
   background: var(--card);
-  box-shadow: 0 2px 4px rgba(60, 40, 20, 0.04), 0 10px 28px rgba(60, 40, 20, 0.08);
+  border: 1px solid var(--line);   /* a border, not a shadow: the scrolling row would clip a shadow */
 }
 .tcard__photo { aspect-ratio: 4 / 3.4; overflow: hidden; background: var(--cream-2); }
 .tcard__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; transition: transform 0.6s ease; }
@@ -690,6 +690,57 @@ body.has-lightbox { overflow: hidden; }
   color: #8a7f68; font-size: 14px; text-align: center; padding: 12px;
 }
 
+/* ============ Program ============ */
+.program__tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 32px; }
+.program__tab {
+  padding: 9px 20px; border-radius: 999px;
+  background: var(--card); color: var(--ink);
+  border: 1px solid var(--line);
+  font: inherit; font-size: 16px; font-weight: 600;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.program__tab:hover { border-color: var(--brick); color: var(--brick); }
+.program__tab.is-active { background: var(--brick); border-color: var(--brick); color: #fff; }
+.program__panel { display: grid; gap: 24px; margin-top: 28px; align-items: start; }
+.program__panel.is-switching { animation: fadeIn 0.35s ease; }
+@media (min-width: 860px) { .program__panel { grid-template-columns: 1.6fr 1fr; } }
+.program__units { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.unit {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  padding: 16px 18px;
+}
+.unit__n {
+  flex: none; width: 40px; height: 40px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--cream-2); color: var(--brick);
+  font-family: var(--font-head); font-weight: 700; font-size: 17px;
+}
+.unit__theme { margin: 0; font-family: var(--font-head); font-weight: 600; font-size: 18px; line-height: 1.3; }
+.unit__content { margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.program__grammar { background: var(--red); color: #fff; border-radius: 20px; padding: 24px; }
+@media (min-width: 860px) { .program__grammar { position: sticky; top: 90px; } }
+.program__grammar h3 { margin: 0 0 14px; font-family: var(--font-head); font-size: 18px; font-weight: 600; }
+.program__grammar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.program__grammar li { position: relative; padding-left: 18px; font-size: 15px; line-height: 1.5; color: #f6e6e6; }
+.program__grammar li::before {
+  content: ""; position: absolute; left: 2px; top: 0.55em;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--orange);
+}
+@media (max-width: 600px) {
+  .program__tabs {
+    flex-wrap: nowrap; justify-content: flex-start;
+    overflow-x: auto; scrollbar-width: none;
+    margin: 24px -16px 0; padding: 2px 16px 4px;
+  }
+  .program__tabs::-webkit-scrollbar { display: none; }
+  .program__tab { flex: none; }
+  .unit { padding: 14px; gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .program__panel.is-switching { animation: none; }
+}
+
 /* ============ Schedule ============ */
 .schedule { display: grid; gap: 24px; align-items: start; }
 @media (min-width: 900px) { .schedule { grid-template-columns: 1fr 1fr; } }
@@ -706,6 +757,9 @@ body.has-lightbox { overflow: hidden; }
   padding: 18px 24px;
 }
 .course__name { color: var(--brick); font-weight: 700; font-size: 20px; }
+.course__title { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+.course__more { font-size: 14px; font-weight: 500; color: var(--brick); text-decoration: underline; text-underline-offset: 3px; }
+.course__more:hover { color: var(--red); }
 .course__label {
   font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--muted);

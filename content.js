@@ -40,11 +40,12 @@ window.SITE = {
   ],
 
   /* ---------- Menu ---------- */
-  // "target" is the id of a section below (home, about, teachers, classes, schedule, feedback, workshop)
+  // "target" is the id of a section below (home, about, teachers, classes, program, schedule, feedback, workshop)
   nav: [
     { label: "Về VAMOS",          target: "about" },
     { label: "Giáo viên",         target: "teachers" },
     { label: "Lớp học thực tế",   target: "classes" },
+    { label: "Chương trình",      target: "program" },
     { label: "Lịch khai giảng",   target: "schedule" },
     { label: "Feedback học viên", target: "feedback" },
     { label: "Workshop",          target: "workshop" },
@@ -69,7 +70,7 @@ window.SITE = {
   /* ---------- Numbers (yellow block) ---------- */
   stats: [
     { number: "+ 230", label: "lớp học đã khai giảng" },
-    { number: "+ 900", label: "học viên đồng hành" },
+    { number: "+ 1000", label: "học viên đồng hành" },
   ],
 
   /* ---------- Về Vamos (timeline) ---------- */
@@ -80,7 +81,7 @@ window.SITE = {
       { year: "Năm 2021", text: "Phát triển thành cộng đồng dạy và học tiếng Tây Ban Nha online với hơn 20.000 lượt theo dõi tự nhiên trên facebook" },
       { year: "Năm 2023", text: "Mở rộng thêm Group này học tiếng Tây Ban Nha với hơn 8.000 thành viên tích cực hoạt động" },
       { year: "Năm 2024", text: "Xuất hiện trên nhiều nền tảng khác (Instagram/Tiktok/Threads)" },
-      { year: "Năm 2025 - 2026", text: "Vamos đã đồng hành cùng hơn 900 học viên trong và ngoài nước trên hành trình học tiếng Tây Ban Nha" },
+      { year: "Năm 2025 - 2026", text: "Vamos đã đồng hành cùng hơn 1000 học viên trong và ngoài nước trên hành trình học tiếng Tây Ban Nha" },
     ],
   },
 
@@ -218,9 +219,138 @@ window.SITE = {
       "images/lop-hoc-12.png",
       "images/lop-hoc-13.png",
       "images/lop-hoc-14.png",
-      "images/lop-hoc-15.png",
       "images/lop-hoc-16.png",
-      "images/lop-hoc-17.png",
+    ],
+  },
+
+  /* ---------- Chương trình học (program) ---------- */
+  // One block per level, shown as tabs. To add a unit, copy a { n, theme, content } line;
+  // to add a grammar point, add a line in "grammar". A level whose "code" matches a course
+  // in the schedule below (e.g. "Khóa A1.1" ↔ "A1.1") gets a "Xem chương trình" link there.
+  program: {
+    title: "Chương trình học",
+    subtitle: "Lộ trình từ A1.1 đến B1.2 - chọn trình độ để xem nội dung từng bài",
+    unitLabel: "Unidad",
+    grammarTitle: "Các điểm ngữ pháp",
+    linkLabel: "Xem chương trình",
+    levels: [
+      {
+        code: "A1.1",
+        units: [
+          { n: 0, theme: "En el aula", content: "Làm quen bảng chữ cái, quy tắc phát âm và trọng âm" },
+          { n: 1, theme: "Nosotros y nosotras", content: "Chào hỏi, giới thiệu tên, tuổi, quốc tịch, nghề nghiệp và số điện thoại" },
+          { n: 2, theme: "Quiero aprender español", content: "Hoạt động giải trí cuối tuần, số đếm từ 0 đến 100" },
+          { n: 3, theme: "¿Dónde está Santiago?", content: "Mô tả thành phố (vị trí, đặc điểm), thời tiết và các mùa trong năm" },
+          { n: 4, theme: "¿Cuál prefieres?", content: "Đi mua sắm (quần áo, màu sắc, giá cả)" },
+          { n: 5, theme: "Tus amigos son mis amigos", content: "Gia đình, sở thích cá nhân, mô tả ngoại hình và tính cách" },
+        ],
+        grammar: [
+          "Giống của danh từ/tính từ; đại từ nhân xưng chủ ngữ",
+          "El presente de indicativo - Thì hiện tại",
+          "Động từ SER, TENER, LLAMARSE và QUERER",
+          "Cấu trúc diễn đạt sự tồn tại (HAY) và vị trí (ESTAR)",
+          "Phân biệt Por / Para / Porque",
+          "Mạo từ xác định/không xác định",
+          "Đại từ chỉ định (este/esta...)",
+          "Lượng từ: muy, mucho, mucha, muchos, muchas, etc",
+          "Động từ LLEVAR, TENER QUE",
+          "Cấu trúc bày tỏ sở thích (Me gusta/n, me encanta/n)",
+        ],
+      },
+      {
+        code: "A1.2",
+        units: [
+          { n: 6, theme: "Día a día", content: "Giờ giấc và các thói quen sinh hoạt hàng ngày" },
+          { n: 7, theme: "¡A comer!", content: "Cách gọi món trong nhà hàng, tên gọi một số thực phẩm phổ biến, cách chế biến món ăn và thói quen ăn uống" },
+          { n: 8, theme: "El barrio ideal", content: "Mô tả khu phố, chỉ đường và các địa điểm công cộng trong thành phố" },
+          { n: 9, theme: "¿Sabes conducir?", content: "Kinh nghiệm/trải nghiệm cá nhân, kỹ năng và phẩm chất nghề nghiệp" },
+        ],
+        grammar: [
+          "Động từ phản thân (levantarse, ducharse, etc)",
+          "Động từ bất quy tắc thì hiện tại (e>ie, o>ue, e>i)",
+          "Cấu trúc trình tự thời gian (Primero, después, antes de/después de + Inf, etc)",
+          "Trạng từ chỉ tần suất (siempre, a veces, nunca, etc)",
+          "Làm quen với đại từ tân ngữ trực tiếp (lo, la, los, las)",
+          "Thì quá khứ hoàn thành (Pretérito Perfecto)",
+          "Phân biệt động từ Saber / Poder",
+        ],
+      },
+      {
+        code: "A2.1",
+        units: [
+          { n: 1, theme: "El español y tú", content: "Phản tư về việc học ngoại ngữ (phong cách học, mục tiêu, cách bày tỏ khó khăn và cảm xúc)" },
+          { n: 2, theme: "Una vida de película", content: "Viết tiểu sử bản thân, các cột mốc thay đổi cuộc đời và kể về các sự kiện trong quá khứ" },
+          { n: 3, theme: "Yo soy así", content: "Các mối quan hệ xã hội: mô tả sự giống nhau giữa người thân, ứng dụng hẹn hò" },
+          { n: 4, theme: "Hogar, dulce hogar", content: "Không gian sống: thuê/bán nhà, vật liệu nội thất và trang trí" },
+          { n: 5, theme: "¿Cómo va todo?", content: "Giao tiếp xã hội: nhờ vả lịch sự, xin phép, đưa ra lời bào chữa" },
+        ],
+        grammar: [
+          "Các cấu trúc bày tỏ sự khó khăn: Es difícil..., me cuesta..., es complicado..., etc",
+          "Các cấu trúc mô tả cảm xúc: sentirse, me da vergüenza/miedo, lo paso bien/mal...",
+          "Thì Quá khứ đơn (Pretérito Indefinido) quy tắc và bất quy tắc",
+          "La duración: desde, desde hace, durante, al año siguiente, etc",
+          "Động từ parecerse",
+          "Đại từ sở hữu nhấn mạnh (mío, tuyo, suyo...)",
+          "Cấu trúc so sánh hơn, kém, bằng",
+          "Thì Hiện tại tiếp diễn (Gerundio) và động từ ở câu điều kiện El Condicional (poder, importar)",
+        ],
+      },
+      {
+        code: "A2.2",
+        units: [
+          { n: 6, theme: "Guía del ocio", content: "Cẩm nang giải trí, dự định tương lai và đánh giá các trải nghiệm văn hóa" },
+          { n: 7, theme: "¿Comes de todo?", content: "Các thói quen và sở thích ăn uống, cách viết công thức nấu ăn" },
+          { n: 8, theme: "Estamos muy bien", content: "Cơ thể, sức khỏe, bệnh tật và triệu chứng, các lời khuyên chữa trị" },
+          { n: 9, theme: "Antes y Ahora", content: "Hồi tưởng quá khứ: ký ức tuổi thơ, sự thay đổi của xã hội" },
+          { n: 10, theme: "Momentos especiales", content: "Các sự kiện quan trọng trong lịch sử, các phát minh lớn và truyền thuyết đô thị" },
+        ],
+        grammar: [
+          "Phân biệt và phối hợp các thì quá khứ (Indefinido và Perfecto). Sử dụng Ya / Todavía no",
+          "Cấu trúc dự định: Ir a / Pensar / Querer + Inf",
+          "Thì Mệnh lệnh khẳng định (Imperativo Afirmativo)",
+          "Thì Quá khứ chưa hoàn thành (Pretérito Imperfecto) để mô tả thói quen và bối cảnh cũ",
+          "Tổng hợp toàn bộ các thì quá khứ",
+        ],
+      },
+      {
+        code: "B1.1",
+        units: [
+          { n: 1, theme: "Prohibido prohibir", content: "Biển báo, quy định công cộng, văn hóa ứng xử và thị trường lao động" },
+          { n: 2, theme: "Volver a empezar", content: "Sự thay đổi lối sống, nguyên nhân quá khứ và dự đoán tương lai" },
+          { n: 3, theme: "Mañana", content: "Ngày mai/Tương lai: các tình huống giả định và dự đoán trong tương lai" },
+          { n: 4, theme: "Va y le dice", content: "Viết tóm tắt/bình luận văn bản, phim ảnh, sách báo, quảng cáo" },
+          { n: 5, theme: "Busque y Compare", content: "Ngành truyền thông và các chiến dịch quảng cáo" },
+          { n: 6, theme: "Basta ya", content: "Viết thư kiến nghị, bày tỏ quan điểm về kinh tế, giáo dục, sức khỏe, an sinh xã hội, khu dân cư,..." },
+        ],
+        grammar: [
+          "Cấu trúc cấm đoán và bắt buộc (Se prohíbe, es obligatorio)",
+          "Diễn đạt sự khách quan (Impersonalidad) với SE",
+          "Các cụm động từ (Perífrasis): Empezar a, Acabar de, Llevar + gerundio, Seguir + gerundio",
+          "El imperativo afirmativo y negativo - Câu mệnh lệnh khẳng định và phủ định",
+          "Vị trí của các đại từ phản thân và đại từ bổ ngữ trực tiếp / gián tiếp (OD / OI)",
+          "Thì Tương lai đơn và câu điều kiện loại 1 (Si + Presente)",
+          "Thì Hiện tại giả định (Presente de Subjuntivo) diễn đạt mong muốn, nhu cầu và cấu trúc với Cuando",
+        ],
+      },
+      {
+        code: "B1.2",
+        units: [
+          { n: 7, theme: "Mensajes", content: "Truyền thông hiện đại: tin nhắn mạng xã hội, bưu thiếp, gọi điện thoại" },
+          { n: 8, theme: "El turista accidental", content: "Du lịch: điểm đến, loại hình du lịch và kể lại các giai thoại có thật hoặc hư cấu" },
+          { n: 9, theme: "Tenemos que hablar", content: "Diễn tả cảm xúc, sự đồng tình, phản đối đa dạng tình huống giao tiếp xã hội" },
+          { n: 10, theme: "De diseño", content: "Đặc điểm và chức năng của các loại dụng cụ" },
+          { n: 11, theme: "Un mundo mejor", content: "Một thế giới tốt đẹp hơn" },
+          { n: 12, theme: "Misterios y enigmas", content: "Giả định và dự đoán ở hiện tại, quá khứ và tương lai (sự kiện bí ẩn về tâm lý, khoa học, etc)" },
+        ],
+        grammar: [
+          "Câu tường thuật (Estilo Indirecto) truyền đạt thông tin, câu hỏi và yêu cầu",
+          "Thì Quá khứ hoàn thành (Pretérito Pluscuamperfecto)",
+          "Sử dụng Giả định (Subjuntivo) để bày tỏ cảm xúc và lợi ích",
+          "Mệnh đề quan hệ có giới từ",
+          "Phân biệt Indicativo / Subjuntivo",
+          "Thì Điều kiện đơn (Condicional Simple) và cách đưa ra giả thuyết bằng thì Tương lai hoàn thành",
+        ],
+      },
     ],
   },
 
@@ -272,7 +402,7 @@ window.SITE = {
   /* ---------- Feedback học viên (quote cards) ---------- */
   feedback: {
     title: "Feedback học viên",    // use \n for a line break
-    subtitle: "Hơn 900 học viên đã đồng hành cùng Vamos",
+    subtitle: "Hơn 1000 học viên đã đồng hành cùng Vamos",
     proofLabel: "Xem tin nhắn gốc",
     // One card per student:
     // "quote"   = the student's own words (keep it short)

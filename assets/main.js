@@ -383,13 +383,76 @@
     moreBtn.hidden = photos.length <= shown;
   });
 
+  /* ---------- program (level tabs → units + grammar) ---------- */
+  var levels = get("program.levels") || [];
+  var showLevel = (function () {
+    var box = document.querySelector("[data-program]");
+    if (!levels.length) { box.closest("section").remove(); return function () {}; }
+    var tabs = el("div", { class: "program__tabs", role: "tablist" });
+    var panel = el("div", { class: "program__panel", role: "tabpanel", id: "program-panel" });
+    var current = -1;
+    levels.forEach(function (lv, i) {
+      var tab = el("button", { class: "program__tab", type: "button", role: "tab", "aria-controls": "program-panel", text: lv.code });
+      tab.addEventListener("click", function () { show(i); });
+      tab.addEventListener("keydown", function (e) {
+        var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        show((i + d + levels.length) % levels.length);
+        tabs.children[current].focus();
+      });
+      tabs.appendChild(tab);
+    });
+    function show(i) {
+      if (i === current) return;
+      current = i;
+      var lv = levels[i];
+      [].forEach.call(tabs.children, function (t, j) {
+        t.classList.toggle("is-active", j === i);
+        t.setAttribute("aria-selected", String(j === i));
+        t.tabIndex = j === i ? 0 : -1;
+      });
+      panel.innerHTML = "";
+      panel.appendChild(el("ol", { class: "program__units" }, (lv.units || []).map(function (u) {
+        return el("li", { class: "unit" }, [
+          el("span", { class: "unit__n", text: String(u.n), "aria-label": (get("program.unitLabel") || "Unidad") + " " + u.n }),
+          el("div", null, [
+            el("h3", { class: "unit__theme", text: u.theme }),
+            el("p", { class: "unit__content", text: u.content }),
+          ]),
+        ]);
+      })));
+      panel.appendChild(el("aside", { class: "program__grammar" }, [
+        el("h3", { text: get("program.grammarTitle") || "Ngữ pháp" }),
+        el("ul", null, (lv.grammar || []).map(function (g) { return el("li", { text: g }); })),
+      ]));
+      // restart the fade-in on every switch
+      panel.classList.remove("is-switching"); void panel.offsetWidth; panel.classList.add("is-switching");
+    }
+    box.appendChild(tabs);
+    box.appendChild(panel);
+    show(0);
+    return function (code) {
+      var i = levels.map(function (lv) { return lv.code; }).indexOf(code);
+      if (i >= 0) show(i);
+    };
+  })();
+
   /* ---------- schedule ---------- */
   var sch = document.querySelector("[data-schedule]");
+  var levelCodes = levels.map(function (lv) { return lv.code; });
   (get("schedule.courses") || []).forEach(function (c) {
     var rows = el("div", { class: "course__rows" });
+    // "Khóa A1.1" links to the A1.1 tab of the program section
+    var code = c.name.replace(/^Khóa\s+/, "");
+    var more = null;
+    if (levelCodes.indexOf(code) >= 0) {
+      more = el("a", { class: "course__more", href: "#program", text: get("program.linkLabel") || "Xem chương trình" });
+      more.addEventListener("click", function () { showLevel(code); });
+    }
     var course = el("div", { class: "course reveal" }, [
       el("div", { class: "course__head" }, [
-        el("span", { class: "course__name", text: c.name }),
+        el("div", { class: "course__title" }, [el("span", { class: "course__name", text: c.name }), more]),
         el("span", { class: "course__label", text: get("schedule.startLabel") || "Khai giảng" }),
       ]),
       rows,
