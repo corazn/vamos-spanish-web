@@ -16,7 +16,8 @@ Open `content.js` in any text editor and change the text inside the quotes.
 Keep the quotes and the commas between items.
 
 - **Schedule**: `schedule.courses` → add/remove `{ code, days, time, start }` rows.
-- **Program**: `program.levels` — one `{ code, units, grammar }` per level, shown as tabs.
+- **Program**: `program.levels` — one `{ code, hours, months, summary, units, grammar }` per level, shown as tabs.
+  `program.stages` are the 4 roadmap steps (A1, A2, B1, B2) above the tabs.
   A course named "Khóa A1.1" in the schedule links to the A1.1 tab automatically.
 - **Photos**: copy images into `images/` and list them in `classes.photos`
   or `workshop.images`. Any missing file shows a striped

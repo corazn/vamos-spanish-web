@@ -32,8 +32,9 @@ window.SITE = {
 
   /* ---------- Social / contact links ---------- */
   // type must be one of: zalo, facebook, tiktok, threads, instagram, youtube, email, phone
+  // "icon" (optional): your own icon file, e.g. "images/zalo.svg" — replaces the built-in icon
   socials: [
-    { type: "zalo",     url: "https://zalo.me/0969801834" },
+    { type: "zalo",     url: "https://zalo.me/0969801834", icon: "images/zalo.svg" },
     { type: "facebook", url: "https://m.me/vamos.taybannha" },
     { type: "tiktok",   url: "https://www.tiktok.com/@vamostaybannha" },
     { type: "threads",  url: "https://www.threads.com/@vamos_daytiengtaybannha" },
@@ -129,18 +130,6 @@ window.SITE = {
         photo: "images/giao-vien-5.jpg",
       },
       {
-        name: "Cô Mỹ Hảo",
-        role: "",
-        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, Đại học KHXH&NV TP.HCM | Hơn 7 năm dạy tiếng Anh và tiếng Tây Ban Nha | Làm việc trong lĩnh vực công nghệ thông tin, phân tích và đánh giá dữ liệu",
-        photo: "images/giao-vien-6.jpg",
-      },
-      {
-        name: "Cô Minh Nguyễn",
-        role: "",
-        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Đang theo học thạc sĩ chuyên ngành giảng dạy tiếng Tây Ban Nha tại trường ĐH Universidad Antonio de Nebrija (Tây Ban Nha)",
-        photo: "images/giao-vien-7.jpg",
-      },
-      {
         name: "Cô Khánh Linh",
         role: "",
         bio: "Thạc sĩ Thiết kế trải nghiệm số - Đại học BAU, Barcelona (Tây Ban Nha) | Cử nhân loại giỏi ngành Mỹ Thuật - Đại học La Laguna (Tây Ban Nha) | Hơn 7 năm sinh sống, học tập và làm việc thực tế tại Tây Ban Nha",
@@ -153,6 +142,18 @@ window.SITE = {
         bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Học bổng trao đổi sinh Erasmus + tại trường ĐH Sevilla (Tây Ban Nha) | Từng là trợ lý văn hóa và báo chí của Đại Sứ Quán Venezuela",
         photo: "images/giao-vien-9.jpg",
         focus: "62% 45%",
+      },
+      {
+        name: "Cô Mỹ Hảo",
+        role: "",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha, Đại học KHXH&NV TP.HCM | Hơn 7 năm dạy tiếng Anh và tiếng Tây Ban Nha | Làm việc trong lĩnh vực công nghệ thông tin, phân tích và đánh giá dữ liệu",
+        photo: "images/giao-vien-6.jpg",
+      },
+      {
+        name: "Cô Minh Nguyễn",
+        role: "",
+        bio: "Cử nhân loại giỏi ngành ngôn ngữ Tây Ban Nha - Đại học Hà Nội (HANU) | Đang theo học thạc sĩ chuyên ngành giảng dạy tiếng Tây Ban Nha tại trường ĐH Universidad Antonio de Nebrija (Tây Ban Nha)",
+        photo: "images/giao-vien-7.jpg",
       },
       {
         name: "Thầy Ngọc Việt",
@@ -219,7 +220,9 @@ window.SITE = {
       "images/lop-hoc-12.png",
       "images/lop-hoc-13.png",
       "images/lop-hoc-14.png",
+      "images/lop-hoc-15.jpg",
       "images/lop-hoc-16.png",
+      "images/lop-hoc-17.jpg",
     ],
   },
 
@@ -229,13 +232,29 @@ window.SITE = {
   // in the schedule below (e.g. "Khóa A1.1" ↔ "A1.1") gets a "Xem chương trình" link there.
   program: {
     title: "Chương trình học",
-    subtitle: "Lộ trình từ A1.1 đến B1.2 - chọn trình độ để xem nội dung từng bài",
+    subtitle: "Chọn trình độ trong lộ trình để xem nội dung từng bài",
     unitLabel: "Unidad",
     grammarTitle: "Các điểm ngữ pháp",
     linkLabel: "Xem chương trình",
+    roadmapTitle: "Lộ trình chinh phục tiếng Tây Ban Nha",
+    frequency: "2 buổi / 1 tuần",
+    pendingNote: "Nội dung chi tiết đang cập nhật",
+    levelLabel: "Trình độ",
+    statLabels: { hours: "Thời lượng", months: "Hoàn thành trong", frequency: "Lịch học" },
+    // The 4 steps of the roadmap; each level belongs to the step its code starts with ("A1.1" → "A1").
+    stages: [
+      { name: "A1", levels: "A1.1 - A1.2", color: "#e8a92c" },
+      { name: "A2", levels: "A2.1 - A2.2", color: "#d9643a" },
+      { name: "B1", levels: "B1.1 - B1.2", color: "#3fa9be" },
+      { name: "B2", levels: "B2.1 - B2.2", color: "#2b55a3" },
+    ],
+    // Each level: hours / months / summary (shown in the roadmap and the tab), then units and grammar.
+    // A level with no units yet shows the "pendingNote" instead.
     levels: [
       {
         code: "A1.1",
+        hours: "36 giờ", months: "3 tháng",
+        summary: "Bảng chữ cái, quy tắc phát âm, số đếm, mua sắm, miêu tả ngoại hình tính cách, làm quen với thì hiện tại đơn.",
         units: [
           { n: 0, theme: "En el aula", content: "Làm quen bảng chữ cái, quy tắc phát âm và trọng âm" },
           { n: 1, theme: "Nosotros y nosotras", content: "Chào hỏi, giới thiệu tên, tuổi, quốc tịch, nghề nghiệp và số điện thoại" },
@@ -259,6 +278,8 @@ window.SITE = {
       },
       {
         code: "A1.2",
+        hours: "36 giờ", months: "3 tháng",
+        summary: "Giờ giấc, thói quen sinh hoạt, mô tả thành phố, nghề nghiệp, gọi món trong nhà hàng. Làm quen với thì quá khứ hoàn thành.",
         units: [
           { n: 6, theme: "Día a día", content: "Giờ giấc và các thói quen sinh hoạt hàng ngày" },
           { n: 7, theme: "¡A comer!", content: "Cách gọi món trong nhà hàng, tên gọi một số thực phẩm phổ biến, cách chế biến món ăn và thói quen ăn uống" },
@@ -277,6 +298,8 @@ window.SITE = {
       },
       {
         code: "A2.1",
+        hours: "40,5 giờ", months: "3,5 tháng",
+        summary: "Học trình bày ý kiến đơn giản, kể lại trải nghiệm cá nhân, mô tả các tình huống quen thuộc với thì quá khứ đơn và hiện tại tiếp diễn.",
         units: [
           { n: 1, theme: "El español y tú", content: "Phản tư về việc học ngoại ngữ (phong cách học, mục tiêu, cách bày tỏ khó khăn và cảm xúc)" },
           { n: 2, theme: "Una vida de película", content: "Viết tiểu sử bản thân, các cột mốc thay đổi cuộc đời và kể về các sự kiện trong quá khứ" },
@@ -297,6 +320,8 @@ window.SITE = {
       },
       {
         code: "A2.2",
+        hours: "40,5 giờ", months: "3,5 tháng",
+        summary: "Làm quen với thì quá khứ chưa hoàn thành, bày tỏ ý kiến và đánh giá với thể mệnh lệnh, giao tiếp linh hoạt hơn trong các chủ đề quen thuộc.",
         units: [
           { n: 6, theme: "Guía del ocio", content: "Cẩm nang giải trí, dự định tương lai và đánh giá các trải nghiệm văn hóa" },
           { n: 7, theme: "¿Comes de todo?", content: "Các thói quen và sở thích ăn uống, cách viết công thức nấu ăn" },
@@ -314,6 +339,8 @@ window.SITE = {
       },
       {
         code: "B1.1",
+        hours: "48 giờ", months: "4 tháng",
+        summary: "Diễn đạt quan điểm và lập luận rõ ràng, phân tích, so sánh, dự đoán tình huống tương lai, bình luận nội dung truyền thông. Làm quen với thì tương lai đơn và hiện tại giả định.",
         units: [
           { n: 1, theme: "Prohibido prohibir", content: "Biển báo, quy định công cộng, văn hóa ứng xử và thị trường lao động" },
           { n: 2, theme: "Volver a empezar", content: "Sự thay đổi lối sống, nguyên nhân quá khứ và dự đoán tương lai" },
@@ -334,6 +361,8 @@ window.SITE = {
       },
       {
         code: "B1.2",
+        hours: "48 giờ", months: "4 tháng",
+        summary: "Kể và phân tích các trải nghiệm thông qua câu tường thuật, đồng thời biết cách so sánh, đánh giá và phản hồi linh hoạt trong các chủ đề về xã hội thông qua thì quá khứ tiền hoàn thành, câu điều kiện đơn và thì tương lai hoàn thành.",
         units: [
           { n: 7, theme: "Mensajes", content: "Truyền thông hiện đại: tin nhắn mạng xã hội, bưu thiếp, gọi điện thoại" },
           { n: 8, theme: "El turista accidental", content: "Du lịch: điểm đến, loại hình du lịch và kể lại các giai thoại có thật hoặc hư cấu" },
@@ -350,6 +379,20 @@ window.SITE = {
           "Phân biệt Indicativo / Subjuntivo",
           "Thì Điều kiện đơn (Condicional Simple) và cách đưa ra giả thuyết bằng thì Tương lai hoàn thành",
         ],
+      },
+      {
+        code: "B2.1",
+        hours: "54 giờ", months: "4,5 tháng",
+        summary: "Tranh luận các chủ đề về truyền thông, báo chí, mạng xã hội, du lịch bền vững, quản lý xã hội, ứng dụng vào tuyển dụng, tìm việc làm và các mối quan hệ cá nhân.",
+        units: [],
+        grammar: [],
+      },
+      {
+        code: "B2.2",
+        hours: "54 giờ", months: "4,5 tháng",
+        summary: "Tường thuật biến cố lịch sử, kể chuyện và giải quyết xung đột. Nhấn mạnh trách nhiệm cộng đồng qua các chủ đề về môi trường, biến đổi khí hậu và cách xây dựng chiến dịch nâng cao nhận thức xã hội và giáo dục.",
+        units: [],
+        grammar: [],
       },
     ],
   },

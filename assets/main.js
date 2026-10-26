@@ -178,8 +178,17 @@
         class: "social social--" + s.type,
         href: s.url, target: "_blank", rel: "noopener", "aria-label": s.type,
       });
-      if (s.type === "zalo") a.appendChild(el("span", { text: "Zalo" }));
-      else a.innerHTML = ICONS[s.type] || "";
+      function builtIn() {
+        a.innerHTML = "";
+        if (s.type === "zalo") a.appendChild(el("span", { text: "Zalo" }));
+        else a.innerHTML = ICONS[s.type] || "";
+      }
+      if (s.icon) {
+        // your own icon file; falls back to the built-in icon if the file is missing
+        var icon = el("img", { src: s.icon, alt: "" });
+        icon.addEventListener("error", builtIn);
+        a.appendChild(icon);
+      } else builtIn();
       box.appendChild(a);
     });
   });
@@ -383,53 +392,138 @@
     moreBtn.hidden = photos.length <= shown;
   });
 
-  /* ---------- program (level tabs → units + grammar) ---------- */
+  /* ---------- program (roadmap steps → units + grammar) ---------- */
   var levels = get("program.levels") || [];
   var showLevel = (function () {
     var box = document.querySelector("[data-program]");
     if (!levels.length) { box.closest("section").remove(); return function () {}; }
-    var tabs = el("div", { class: "program__tabs", role: "tablist" });
+    var REPEAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>';
+    var freq = get("program.frequency") || "";
+    var labels = get("program.statLabels") || {};
+    var stages = get("program.stages") || [];
+    var stageOf = function (lv) { return lv.code.slice(0, 2); };
+    var colorOf = function (lv) {
+      var st = stages.filter(function (s) { return s.name === stageOf(lv); })[0];
+      return (st && st.color) || "var(--brick)";
+    };
     var panel = el("div", { class: "program__panel", role: "tabpanel", id: "program-panel" });
     var current = -1;
-    levels.forEach(function (lv, i) {
-      var tab = el("button", { class: "program__tab", type: "button", role: "tab", "aria-controls": "program-panel", text: lv.code });
-      tab.addEventListener("click", function () { show(i); });
-      tab.addEventListener("keydown", function (e) {
+
+    // roadmap: one rising step per stage (A1 → B2); the level buttons under each step are the tabs
+    var tabs = [];       // tab button per level index
+    var steps = [];
+    var list = el("div", { class: "roadmap__steps", role: "tablist" });
+    function levelButton(lv, i) {
+      var b = el("button", { class: "step__lv", type: "button", role: "tab", "aria-controls": "program-panel" }, [
+        el("span", { class: "step__dot", "aria-hidden": "true" }),
+        el("strong", { text: lv.code }),
+        lv.months ? el("span", { class: "step__months", text: lv.months }) : null,
+      ]);
+      b.addEventListener("click", function () {
+        show(i);
+        // on small screens the panel can be far below: bring it into view
+        if (panel.getBoundingClientRect().top > window.innerHeight * 0.7) {
+          panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+      b.addEventListener("keydown", function (e) {
         var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
         if (!d) return;
         e.preventDefault();
         show((i + d + levels.length) % levels.length);
-        tabs.children[current].focus();
+        tabs[current].focus();
       });
-      tabs.appendChild(tab);
-    });
+      tabs[i] = b;
+      return b;
+    }
+    if (stages.length) {
+      stages.forEach(function (st, k) {
+        var buttons = [];
+        levels.forEach(function (lv, i) { if (stageOf(lv) === st.name) buttons.push(levelButton(lv, i)); });
+        var step = el("div", { class: "step step--" + (k + 1), style: "--step:" + (st.color || "var(--brick)") }, [
+          el("div", { class: "step__block" }, [
+            el("span", { class: "step__name", text: st.name }),
+            el("span", { class: "step__meta" }, [
+              el("span", { class: "step__levels", text: st.levels || "" }),
+              freq ? el("span", { class: "step__freq", text: freq }) : null,
+            ]),
+          ]),
+          el("div", { class: "step__list" }, buttons),
+        ]);
+        step.dataset.stage = st.name;
+        steps.push(step);
+        list.appendChild(step);
+      });
+    } else {
+      list.classList.add("roadmap__steps--plain");
+      levels.forEach(function (lv, i) { list.appendChild(levelButton(lv, i)); });
+    }
+    var roadmap = el("div", { class: "roadmap" }, [
+      get("program.roadmapTitle") ? el("h3", { class: "roadmap__title", text: get("program.roadmapTitle") }) : null,
+      list,
+    ]);
+
+    function stat(icon, value, label) {
+      return el("div", { class: "level-head__stat" }, [
+        el("span", { class: "level-head__icon", html: icon, "aria-hidden": "true" }),
+        el("div", null, [
+          el("div", { class: "level-head__value", text: value }),
+          label ? el("div", { class: "level-head__label", text: label }) : null,
+        ]),
+      ]);
+    }
+
     function show(i) {
       if (i === current) return;
       current = i;
       var lv = levels[i];
-      [].forEach.call(tabs.children, function (t, j) {
+      tabs.forEach(function (t, j) {
         t.classList.toggle("is-active", j === i);
         t.setAttribute("aria-selected", String(j === i));
         t.tabIndex = j === i ? 0 : -1;
       });
+      steps.forEach(function (st) { st.classList.toggle("is-current", st.dataset.stage === stageOf(lv)); });
+      panel.style.setProperty("--step", colorOf(lv));
       panel.innerHTML = "";
-      panel.appendChild(el("ol", { class: "program__units" }, (lv.units || []).map(function (u) {
-        return el("li", { class: "unit" }, [
-          el("span", { class: "unit__n", text: String(u.n), "aria-label": (get("program.unitLabel") || "Unidad") + " " + u.n }),
-          el("div", null, [
-            el("h3", { class: "unit__theme", text: u.theme }),
-            el("p", { class: "unit__content", text: u.content }),
-          ]),
-        ]);
-      })));
-      panel.appendChild(el("aside", { class: "program__grammar" }, [
-        el("h3", { text: get("program.grammarTitle") || "Ngữ pháp" }),
-        el("ul", null, (lv.grammar || []).map(function (g) { return el("li", { text: g }); })),
+
+      // header card: level code + summary, with hours / months / frequency
+      var stats = [
+        lv.hours ? stat(CLOCK, lv.hours, labels.hours) : null,
+        lv.months ? stat(CALENDAR, lv.months, labels.months) : null,
+        freq ? stat(REPEAT, freq, labels.frequency) : null,
+      ].filter(Boolean);
+      panel.appendChild(el("div", { class: "level-head" }, [
+        el("div", { class: "level-head__main" }, [
+          get("program.levelLabel") ? el("span", { class: "level-head__eyebrow", text: get("program.levelLabel") }) : null,
+          el("h3", { class: "level-head__code", text: lv.code }),
+          lv.summary ? el("p", { class: "level-head__summary", text: lv.summary }) : null,
+        ]),
+        stats.length ? el("div", { class: "level-head__stats" }, stats) : null,
       ]));
+
+      if (!(lv.units || []).length) {
+        panel.appendChild(el("p", { class: "program__pending", text: get("program.pendingNote") || "Nội dung chi tiết đang cập nhật" }));
+      } else {
+        panel.appendChild(el("div", { class: "program__body" }, [
+          el("ol", { class: "program__units" }, lv.units.map(function (u) {
+            return el("li", { class: "unit" }, [
+              el("span", { class: "unit__n", text: String(u.n), "aria-label": (get("program.unitLabel") || "Unidad") + " " + u.n }),
+              el("div", null, [
+                el("h3", { class: "unit__theme", text: u.theme }),
+                el("p", { class: "unit__content", text: u.content }),
+              ]),
+            ]);
+          })),
+          (lv.grammar || []).length ? el("aside", { class: "program__grammar" }, [
+            el("h3", { text: get("program.grammarTitle") || "Ngữ pháp" }),
+            el("ul", null, lv.grammar.map(function (g) { return el("li", { text: g }); })),
+          ]) : null,
+        ]));
+      }
       // restart the fade-in on every switch
       panel.classList.remove("is-switching"); void panel.offsetWidth; panel.classList.add("is-switching");
     }
-    box.appendChild(tabs);
+    box.appendChild(roadmap);
     box.appendChild(panel);
     show(0);
     return function (code) {
