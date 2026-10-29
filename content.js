@@ -60,7 +60,7 @@ window.SITE = {
     description:
       "Mô hình các lớp học tiếng Tây Ban Nha online nhóm nhỏ, lớp kèm 1-1, kèm 1-2, kèm theo yêu cầu, các lớp giao tiếp, luyện thi DELE lấy chứng chỉ",
     // Buttons. Use "url" for a link (opens in a new tab) or "target" for a section of this page.
-    ctaPrimary:   { label: "Đăng ký học thử",    url: "https://zalo.me/0969801834" },
+    ctaPrimary:   { label: "Đăng ký học",        url: "https://zalo.me/0969801834" },
     ctaSecondary: { label: "Xem lịch khai giảng", target: "schedule" },
     contactPrompt: "Liên hệ để được tư vấn lớp học phù hợp",
     // Photos in the scrolling columns on the right.
@@ -405,38 +405,36 @@ window.SITE = {
       {
         name: "Khóa A1.1",
         classes: [
-          { code: "A1.1 - 127", days: "Thứ 3 - 5",  time: "20h - 21h30", start: "08/09" },
-          { code: "A1.1 - 128", days: "Thứ 2 - 4",  time: "20h - 21h30", start: "09/09" },
-          { code: "A1.1 - 129", days: "Thứ 7 - CN", time: "9h - 10h30",  start: "17/09" },
-          { code: "A1.1 - 130", days: "Thứ 3 - 5",  time: "9h - 10h30",  start: "22/09" },
+          { code: "A1.1 - 138", days: "Thứ 2 - 4",  time: "22h30 - 24h (giờ Tây Ban Nha)", start: "02/11" },
+          { code: "A1.1 - 139", days: "Thứ 4 - 6",  time: "9h - 10h30",  start: "11/11" },
+          { code: "A1.1 - 140", days: "Thứ 2 - 4",  time: "20h - 21h30", start: "09/11" },
+          { code: "A1.1 - 141", days: "Thứ 3 - 5",  time: "20h - 21h30", start: "24/11" },
         ],
       },
       {
         name: "Khóa A1.2",
         classes: [
-          { code: "A1.2 - 112", days: "Thứ 3 - 5",  time: "20h - 21h30", start: "24/09" },
-          { code: "A1.2 - 114", days: "Thứ 7 - CN", time: "9h - 10h30",  start: "10/10" },
-          { code: "A1.2 - 115", days: "Thứ 6 - CN", time: "20h - 21h30", start: "18/10" },
+          { code: "A1.2 - 114", days: "Thứ 7 - CN", time: "9h - 10h30",  start: "07/11" },
+          { code: "A1.2 - 124", days: "Thứ 4 - 6",  time: "9h - 10h30",  start: "18/11" },
+          { code: "A1.2 - 122", days: "Thứ 3 - 5",  time: "20h - 21h30", start: "17/11" },
         ],
       },
       {
         name: "Khóa A2.1",
         classes: [
-          { code: "A2.1 - 101", days: "Thứ 6 - CN", time: "20h - 21h30", start: "18/09" },
-          { code: "A2.1 - 102", days: "Thứ 3 - 5",  time: "20h - 21h30", start: "01/10" },
+          { code: "A2.1 - 108", days: "Thứ 7 - CN", time: "8h30 - 10h",  start: "15/11" },
         ],
       },
       {
-        name: "Khóa B1.1",
+        name: "Khóa A2.2",
         classes: [
-          { code: "B1.1 - 078", days: "Thứ 7 - CN", time: "15h30 - 17h", start: "05/09" },
-          { code: "B1.1 - 085", days: "Thứ 2 - 4",  time: "20h - 21h30", start: "26/10" },
+          { code: "A2.2 - 097", days: "Thứ 2 - 4",  time: "20h - 21h30", start: "11/11" },
         ],
       },
       {
-        name: "Khóa DELE B1.1",
+        name: "Khóa B1.2",
         classes: [
-          { code: "DELE B1", days: "Thứ 2 - 6", time: "19h - 20h30", start: "04/09" },
+          { code: "B1.2 - 069", days: "Thứ 2 - 4",  time: "20h - 21h30", start: "23/11" },
         ],
       },
     ],
