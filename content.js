@@ -109,7 +109,7 @@ window.SITE = {
         role: "",
         bio: "Thư ký thương vụ Đại Sứ Quán Tây Ban Nha | 10 năm giảng dạy tiếng Tây Ban Nha | 10 năm kinh nghiệm làm phiên dịch viên tự do cho các tổ chức, sự kiện và hội nghị đa quốc gia",
         photo: "images/giao-vien-2.jpg",
-        focus: "50% 25%",
+        focus: "50% 0%",
       },
       {
         name: "Cô Ngọc Tú",
